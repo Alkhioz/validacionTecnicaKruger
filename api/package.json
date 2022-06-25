@@ -1,0 +1,17 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Fake api \"vaccination inventory\" for Kruger's technical validation.",
+  "main": "index.js",
+  "dependencies": {
+    "json-server": "^0.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Alejandro Mendoza",
+  "license": "ISC"
+}

@@ -1,0 +1,29 @@
+{
+    "user": [
+      { "id": 1, "dni": "0000000000", "name": "Alejandro", "lastname": "Mendoza","username":"ale01","password":"Pass123.",
+        "email": "admin@fakemail.com", "dateOfBirth": "05/06/1988","address":"Calle principal, Portoviejo",
+        "phone":"+593998855662", "pendingValidation": false},
+      { "id": 2, "dni": "0000000000", "name": "Alejandro", "lastname": "Mendoza","username":"ale01","password":"Pass123.",
+        "email": "admin@fakemail.com", "dateOfBirth": "05/06/1988","address":"Calle principal, Portoviejo",
+        "phone":"+593998855662", "pendingValidation": false},
+      { "id": 3, "dni": "0000000000", "name": "Alejandro", "lastname": "Mendoza","username":"ale01","password":"Pass123.",
+          "email": "admin@fakemail.com", "dateOfBirth": "","address":"",
+          "phone":"", "pendingValidation": true}
+    ],
+    "role": [
+        {"id": 1, "description": "admin"},
+        {"id": 2, "description": "employee"}
+    ],
+    "roleByUser":[
+        {"userId": 1, "roleId": 1},
+        {"userId": 2, "roleId": 2},
+        {"userId": 3, "roleId": 2}
+    ],
+    "vaccine": [
+      { "id": 1, "body": "Sputnik"},
+      { "id": 2, "body": "AstraZeneca"},
+      { "id": 3, "body": "Pfizer"},
+      { "id": 4, "body": "Jhonson&Jhonson"}
+    ],
+    "profile": { "name": "nuselaverdad" }
+}
