@@ -1,13 +1,15 @@
 import './App.css';
-import IconButton from './components/iconbutton/IconButton.js';
+/*import IconButton from './components/iconbutton/IconButton.js';
 import Input from './components/input/Input.js';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from './utilities/utilities.js';
 import verificarCedula from './utilities/validarCedula';
 
-import { useState } from 'react';
+import { useState } from 'react';*/
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [stateCedula, setStateCedula] = useState("");
+  /*const [stateCedula, setStateCedula] = useState("");
   const [stateCedulaError, setStateCedulaError] = useState("");
   
   const [stateNombre, setStateNombre] = useState("");
@@ -59,9 +61,20 @@ function App() {
     }else{
       setStateEmailError("");
     }
-  }
+  }*/
   return (
-    <div className="App">
+    <Router>
+      <Routes>
+        <Route path="/" element={<p>INICIO</p>} />
+        <Route path="/login" element={<p>LOGIN</p>} />
+        <Route path="/dashboard" element={<p>DASHBOARD</p>} />
+        <Route path="*" element={<p>404</p>} />
+      </Routes>
+    </Router>
+  );
+}
+
+/*<div className="App">
       <header className="AppHeader">
         <h1>This is the h1 header</h1>
         <h2>This is the h2 header</h2>
@@ -112,8 +125,5 @@ function App() {
         onBlur={onBlurCedula}
         error={stateCedulaError}
       />
-    </div>
-  );
-}
-
+  </div>*/
 export default App;
