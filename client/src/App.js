@@ -1,4 +1,5 @@
 import './App.css';
+import IconButton from './components/iconbutton/IconButton.js';
 
 function App() {
   return (
@@ -11,6 +12,20 @@ function App() {
         <h5>This is the h5 header</h5>
       </header>
       <p>lorem ipsum dolor sit amet, consectetur adip <i className="fa fa-car"></i></p>
+      <IconButton 
+        id="uno"
+        onclick={(evt)=>{evt.preventDefault(); console.log("it works");}}
+        name="Enviar Carro"
+        icon="fa fa-car"
+        type="IconButton"
+      />
+      <IconButton 
+        id="dos"
+        onclick={(evt)=>{evt.preventDefault(); console.log("it works");}}
+        name="Enviar Carro"
+        icon="fa fa-car"
+        type="IconButtonAlter"
+      />
     </div>
   );
 }

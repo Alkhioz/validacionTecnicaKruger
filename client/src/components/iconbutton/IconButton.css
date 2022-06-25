@@ -1,0 +1,40 @@
+.IconButton{
+    display: inline-block;
+    color: var(--secondary-color);
+    background-color: var(--brand-color);
+    padding: 1rem;
+    border: none;
+    outline: none;
+    border-radius:100vmax;
+    width: 100%;
+    font-weight: bold;
+}
+.IconButton>i,.IconButtonAlter>i{
+    margin-left: .5rem;
+}
+.IconButton:hover{
+    background-color: var(--focus-color);
+}
+.IconButton:focus{
+    background-color: var(--focus-color);
+}
+
+.IconButtonAlter{
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--brand-color);
+    padding: 1rem;
+    border: none;
+    outline: 2px solid var(--brand-color);
+    border-radius:100vmax;
+    width: 100%;
+    font-weight: bold;
+}
+.IconButtonAlter:hover{
+    color: var(--focus-color);
+    outline: 2px solid var(--focus-color);
+}
+.IconButtonAlter:focus{
+    color: var(--focus-color);
+    outline: 2px solid var(--focus-color);
+}
