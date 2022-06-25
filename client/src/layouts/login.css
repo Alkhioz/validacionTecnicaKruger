@@ -1,0 +1,20 @@
+.loginLayout{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+}
+.loginCard{
+    width: calc(100% - 4rem);
+    max-width: 400px;
+    margin: 2rem;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 var(--primary-color);
+}
+.loginTitle{
+    color: var(--brand-color);
+}
+@media (max-width: 800px) {    
+    .loginTitle{
+        font-size: 1.5rem;
+    }
+}

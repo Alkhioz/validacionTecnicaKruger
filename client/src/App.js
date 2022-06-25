@@ -7,6 +7,7 @@ import verificarCedula from './utilities/validarCedula';
 import { useState } from 'react';*/
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from './layouts/login.js';
 
 function App() {
   /*const [stateCedula, setStateCedula] = useState("");
@@ -66,7 +67,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<p>INICIO</p>} />
-        <Route path="/login" element={<p>LOGIN</p>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/dashboard" element={<p>DASHBOARD</p>} />
         <Route path="*" element={<p>404</p>} />
       </Routes>
