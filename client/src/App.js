@@ -1,7 +1,8 @@
 import './App.css';
 import IconButton from './components/iconbutton/IconButton.js';
 import Input from './components/input/Input.js';
-import {isNumeric, isNotDot, isLetter, isValidEmail} from './utilities/utilities.js'
+import {isNumeric, isNotDot, isLetter, isValidEmail} from './utilities/utilities.js';
+import verificarCedula from './utilities/validarCedula';
 
 import { useState } from 'react';
 
@@ -15,8 +16,9 @@ function App() {
   const [stateEmailError, setStateEmailError] = useState("");
 
   const validarCedula = () => {
-    if(stateCedula.length < 10){
-      setStateCedulaError("Debe colocar los 10 digitos de la cédula");
+    let validacion = verificarCedula(stateCedula);
+    if(!validacion.status){
+      setStateCedulaError(validacion.msg);
     }else{
       setStateCedulaError("");
     }
