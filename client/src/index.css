@@ -4,6 +4,7 @@
   --tertiary-color: rgb(89, 89, 89);
   --brand-color: rgb(255, 108, 0); 
   --focus-color: rgb(0, 92, 185);
+  --error-color: rgb(201, 46, 3); 
 }
 
 *,
@@ -21,7 +22,7 @@ body {
   background-color: var(--secondary-color);
   color: var(--primary-color);
 }
-
+/*
 @font-face {
   font-family: 'AtkinsonHyperlegible';
   src: url('font/Atkinson-Hyperlegible-Regular-102.woff');
@@ -54,7 +55,7 @@ body {
   src: url("font/Atkinson-Hyperlegible-BoldItalic-102.woff");
   font-weight: bold;
   font-style: oblique;
-}
+}*/
 
 @media (max-width: 900px) {
   html { font-size: 18px; }

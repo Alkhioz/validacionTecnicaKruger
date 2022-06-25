@@ -55,3 +55,6 @@
     transition: 300ms ease all;
     left: 0%;
 }
+.InputError{
+    color: var(--error-color);
+}

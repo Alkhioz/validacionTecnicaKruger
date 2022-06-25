@@ -7,11 +7,23 @@ import { useState } from 'react';
 
 function App() {
   const [stateCedula, setStateCedula] = useState("");
+  const [stateCedulaError, setStateCedulaError] = useState("");
+
+  const validarCedula = () => {
+    if(stateCedula.length < 10){
+      setStateCedulaError("Debe colocar los 10 digitos de la cédula");
+    }else{
+      setStateCedulaError("");
+    }
+  };
 
   const onChangeCedula = (evt) => {
     evt.preventDefault();
     if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
       setStateCedula(evt.target.value);
+  }
+  const onBlurCedula = (evt) => {
+    validarCedula();
   }
   return (
     <div className="App">
@@ -51,8 +63,11 @@ function App() {
         type="text"
         name="Cédula"
         id="Cedula"
+        maxLength="10"
         value={stateCedula}
         onChange={onChangeCedula}
+        onBlur={onBlurCedula}
+        error={stateCedulaError}
       />
     </div>
   );
