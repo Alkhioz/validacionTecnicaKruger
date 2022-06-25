@@ -11,7 +11,8 @@
       "dateOfBirth": "05/06/1988",
       "address": "Calle principal, Portoviejo",
       "phone": "+593998855662",
-      "pendingValidation": false
+      "pendingValidation": false,
+      "roleId": 1
     },
     {
       "id": 2,
@@ -24,7 +25,8 @@
       "dateOfBirth": "05/06/1988",
       "address": "Calle principal, Portoviejo",
       "phone": "+593998855662",
-      "pendingValidation": false
+      "pendingValidation": false,
+      "roleId": 2
     },
     {
       "id": 3,
@@ -37,19 +39,22 @@
       "dateOfBirth": "",
       "address": "",
       "phone": "",
-      "pendingValidation": true
+      "pendingValidation": true,
+      "roleId": 2
     },
     {
       "dni": "12124512121",
-      "name": "Alejandro",
-      "lastname": "Mendoza",
-      "username": "ale01",
+      "name": "Pedro",
+      "lastname": "Jacinto",
+      "username": "pedro",
       "password": "Pass123.",
       "email": "admin@fakemail.com",
       "dateOfBirth": "05/06/1988",
       "address": "Calle principal, Portoviejo",
       "phone": "+593998855662",
       "pendingValidation": false,
+      "roleId": 2,
+      "vaccine": "",
       "id": 4
     }
   ],
@@ -61,20 +66,6 @@
     {
       "id": 2,
       "description": "employee"
-    }
-  ],
-  "roleByUser": [
-    {
-      "userId": 1,
-      "roleId": 1
-    },
-    {
-      "userId": 2,
-      "roleId": 2
-    },
-    {
-      "userId": 3,
-      "roleId": 2
     }
   ],
   "vaccine": [
@@ -95,7 +86,10 @@
       "body": "Jhonson&Jhonson"
     }
   ],
-  "profile": {
-    "name": "nuselaverdad"
-  }
+  "vaccineByUser": [
+    {
+      "userId": 1,
+      "vaccineId": 2
+    }
+  ]
 }

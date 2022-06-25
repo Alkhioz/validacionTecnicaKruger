@@ -32,15 +32,17 @@ const auth = (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-    let user = db.roleByUser.find(role=>{
-        return role.userId == req.decoded
+    let user = db.user.find(role=>{
+        return role.id == req.decoded
     })
-    if (user.roleId == 1)
+    if (user.roleId == 1){
         next()
+    }else{
     res.jsonp({
             msg: 'err',
             data: {description: "user cant access this info"}
         })
+    }
 }
 
 server.post('/login', (req, res) => {
@@ -81,7 +83,21 @@ server.get('/getCurrentUserData', auth, (req, res) => {
 
 server.get('/getUsers', auth, isAdmin, (req, res) => {
     let users = db.user.map(user =>{
+        let vaccineId = db.vaccineByUser.filter(data=>data.userId == user.id)
+        let vaccine = {}
+        if(vaccineId.length){
+            let vaccineData = db.vaccine.filter(data=> data.id == vaccineId[0].vaccineId)
+            vaccine = {
+                status: true,
+                vaccine: vaccineData[0].body
+            }
+        }else{
+            vaccine = {
+                status: false,
+            }
+        }
         let data = {
+            id: user.id,
             name: user.name,
             lastname: user.lastname,
             dni: user.dni,
@@ -89,7 +105,9 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
             username: user.username,
             address: user.address,
             phone: user.phone,
-            birth: user.dateOfBirth
+            birth: user.dateOfBirth,
+            isAdmin: user.roleId === 1 ? true : false,
+            vaccination: vaccine
         }
         return data
     })
@@ -97,10 +115,6 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
         msg: 'ok',
         data: {users}
     });
-})
-
-server.post('addUser', (req, res) => {
-    
 })
 
 server.use(middlewares)
