@@ -3,8 +3,18 @@ const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const db = require('./db.json');
 const middlewares = jsonServer.defaults()
+const cors = require('cors');
 
-var jwt = require('jsonwebtoken')
+var corsOptions = {
+    credentials: true,
+    origin: "*",
+    methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: 'accept, content-type'
+};
+
+server.use(cors(corsOptions));
+
+const jwt = require('jsonwebtoken')
 
 server.use(jsonServer.bodyParser)
 
@@ -53,7 +63,7 @@ server.post('/login', (req, res) => {
     if(user === undefined){
         res.jsonp({
             msg: 'err',
-            data: {description: 'invalid user or password'}
+            data: {description: 'Usuario o contraseña incorrectos.'}
         });
     }else{
         let token = createToken(user.id)
