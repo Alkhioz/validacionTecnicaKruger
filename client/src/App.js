@@ -8,6 +8,8 @@ import { useState } from 'react';*/
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './layouts/login.js';
+import Inicio from './layouts/inicio.js';
+
 
 function App() {
   /*const [stateCedula, setStateCedula] = useState("");
@@ -66,7 +68,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<p>INICIO</p>} />
+        <Route path="/" element={<Inicio/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="*" element={<p>404</p>} />
       </Routes>
