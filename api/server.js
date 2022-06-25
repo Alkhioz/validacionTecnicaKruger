@@ -4,11 +4,32 @@ const router = jsonServer.router('db.json')
 const db = require('./db.json');
 const middlewares = jsonServer.defaults()
 
+var jwt = require('jsonwebtoken')
+
 server.use(jsonServer.bodyParser)
+
+const secret = "thisIsTheSecretCode224411222.////####"
+
+const createToken = (data) => jwt.sign({data}, secret, { expiresIn: '1h' })
 
 server.post('/login', (req, res) => {
     let {username, password} = req.body
-    console.log({username, password})
+    let user = db.user.find(user=>{
+        return user.username === username && user.password === password
+    })
+    if(user === undefined){
+        res.jsonp({
+            msg: 'err',
+            data: {description: 'invalid user or password'}
+        });
+    }else{
+        let token = createToken(user.id)
+        res.jsonp({
+            msg: 'ok',
+            data: {token}
+        });
+    }
+    
 })
 
 server.get('/user/:id', (req, res) => {
