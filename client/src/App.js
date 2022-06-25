@@ -1,13 +1,15 @@
 import './App.css';
 import IconButton from './components/iconbutton/IconButton.js';
 import Input from './components/input/Input.js';
-import {isNumeric, isNotDot} from './utilities/utilities.js'
+import {isNumeric, isNotDot, isLetter} from './utilities/utilities.js'
 
 import { useState } from 'react';
 
 function App() {
   const [stateCedula, setStateCedula] = useState("");
   const [stateCedulaError, setStateCedulaError] = useState("");
+  
+  const [stateNombre, setStateNombre] = useState("");
 
   const validarCedula = () => {
     if(stateCedula.length < 10){
@@ -22,6 +24,13 @@ function App() {
     if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
       setStateCedula(evt.target.value);
   }
+
+  const onChangeNombre = (evt) => {
+    evt.preventDefault();
+    if(isLetter(evt.target.value))
+      setStateNombre(evt.target.value);
+  }
+
   const onBlurCedula = (evt) => {
     validarCedula();
   }
@@ -53,6 +62,8 @@ function App() {
         type="text"
         name="Nombre"
         id="Nombre"
+        value={stateNombre}
+        onChange={onChangeNombre}
       />
       <Input 
         type="email"
