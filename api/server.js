@@ -81,19 +81,6 @@ server.get('/getCurrentUserData', auth, (req, res) => {
 
 server.get('/getUsers', auth, isAdmin, (req, res) => {
     let users = db.user.map(user =>{
-        let vaccineId = db.vaccineByUser.filter(data=>data.userId == user.id)
-        let vaccine = {}
-        if(vaccineId.length){
-            let vaccineData = db.vaccine.filter(data=> data.id == vaccineId[0].vaccineId)
-            vaccine = {
-                status: true,
-                vaccine: vaccineData[0].body
-            }
-        }else{
-            vaccine = {
-                status: false,
-            }
-        }
         let data = {
             id: user.id,
             name: user.name,
@@ -105,7 +92,7 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
             phone: user.phone,
             birth: user.dateOfBirth,
             isAdmin: user.roleId === 1 ? true : false,
-            vaccination: vaccine
+            vaccination: user.vaccine === ""?{status:false}:{status:true, vaccine:user.vaccine}
         }
         return data
     })
@@ -114,6 +101,7 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
         data: {users}
     });
 })
+
 
 server.use(middlewares)
 server.use(auth)
