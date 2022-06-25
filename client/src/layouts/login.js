@@ -3,6 +3,7 @@ import IconButton from '../components/iconbutton/IconButton.js';
 import Input from '../components/input/Input.js';
 import { useState } from 'react';
 import {login} from '../libs/auth.js';
+import { Navigate } from "react-router-dom";
 
 function Login(){
     const [stateUsuario, setStateUsuario] = useState("");
@@ -25,6 +26,11 @@ function Login(){
             setStateError(authdata.data.description);
         }
     }
+    
+    if(localStorage.getItem("token") !== null){
+        return <Navigate to="/" replace />;
+    }
+    
     return(
         <div className="loginLayout">
             <div className="loginCard">

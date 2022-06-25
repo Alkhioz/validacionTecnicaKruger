@@ -68,7 +68,6 @@ function App() {
       <Routes>
         <Route path="/" element={<p>INICIO</p>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/dashboard" element={<p>DASHBOARD</p>} />
         <Route path="*" element={<p>404</p>} />
       </Routes>
     </Router>
