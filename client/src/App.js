@@ -1,7 +1,18 @@
 import './App.css';
 import IconButton from './components/iconbutton/IconButton.js';
+import Input from './components/input/Input.js';
+import {isNumeric, isNotDot} from './utilities/utilities.js'
+
+import { useState } from 'react';
 
 function App() {
+  const [stateCedula, setStateCedula] = useState("");
+
+  const onChangeCedula = (evt) => {
+    evt.preventDefault();
+    if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
+      setStateCedula(evt.target.value);
+  }
   return (
     <div className="App">
       <header className="AppHeader">
@@ -14,17 +25,34 @@ function App() {
       <p>lorem ipsum dolor sit amet, consectetur adip <i className="fa fa-car"></i></p>
       <IconButton 
         id="uno"
-        onclick={(evt)=>{evt.preventDefault(); console.log("it works");}}
+        onClick={(evt)=>{evt.preventDefault();console.log("it works");}}
         name="Enviar Carro"
         icon="fa fa-car"
         type="IconButton"
       />
       <IconButton 
         id="dos"
-        onclick={(evt)=>{evt.preventDefault(); console.log("it works");}}
+        onClick={(evt)=>{evt.preventDefault();console.log("it works");}}
         name="Enviar Carro"
         icon="fa fa-car"
         type="IconButtonAlter"
+      />
+      <Input 
+        type="text"
+        name="Nombre"
+        id="Nombre"
+      />
+      <Input 
+        type="email"
+        name="Correo"
+        id="Correo"
+      />
+      <Input 
+        type="text"
+        name="Cédula"
+        id="Cedula"
+        value={stateCedula}
+        onChange={onChangeCedula}
       />
     </div>
   );
