@@ -15,47 +15,13 @@
 
 body {
   margin: 0;
-  font-family: "AtkinsonHyperlegible";
+  font-family: 'Atkinson Hyperlegible', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 18px;
   background-color: var(--secondary-color);
   color: var(--primary-color);
 }
-/*
-@font-face {
-  font-family: 'AtkinsonHyperlegible';
-  src: url('font/Atkinson-Hyperlegible-Regular-102.woff');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "AtkinsonHyperlegible";
-  src: url("font/Atkinson-Hyperlegible-Bold-102.woff");
-  font-weight: bold;
-}
-@font-face {
-  font-family: "AtkinsonHyperlegible";
-  src: url("font/Atkinson-Hyperlegible-Italic-102.woff");
-  font-style: italic;
-}
-@font-face {
-  font-family: "AtkinsonHyperlegible";
-  src: url("font/Atkinson-Hyperlegible-BoldItalic-102.woff");
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: "AtkinsonHyperlegible";
-  src: url("font/Atkinson-Hyperlegible-Italic-102.woff");
-  font-style: oblique;
-}
-@font-face {
-  font-family: "AtkinsonHyperlegible";
-  src: url("font/Atkinson-Hyperlegible-BoldItalic-102.woff");
-  font-weight: bold;
-  font-style: oblique;
-}*/
 
 @media (max-width: 900px) {
   html { font-size: 18px; }
