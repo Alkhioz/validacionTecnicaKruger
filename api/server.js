@@ -70,13 +70,11 @@ server.get('/getCurrentUserData', auth, (req, res) => {
     let user = db.user.find(user => {
         return user.id == req.decoded
     })
-    let role = db.roleByUser.find(role =>{
-        return role.userId == user.id
-    })
 
     let response = {
         name: `${user.name} ${user.lastname}`,
-        isAdmin: role.roleId === 1 ? true:false
+        isAdmin: user.roleId === 1 ? true:false,
+        isIncomplete: user.dateOfBirth === "" || user.address === "" || user.phone === ""
     }
     res.jsonp(response)
 })
