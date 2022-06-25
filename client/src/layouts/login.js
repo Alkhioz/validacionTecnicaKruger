@@ -2,6 +2,7 @@ import './login.css';
 import IconButton from '../components/iconbutton/IconButton.js';
 import Input from '../components/input/Input.js';
 import { useState } from 'react';
+import {login} from '../libs/auth.js';
 
 function Login(){
     const [stateUsuario, setStateUsuario] = useState("");
@@ -13,6 +14,9 @@ function Login(){
     const onChangeClave = (evt) => {
         evt.preventDefault();
         setStateClave(evt.target.value);
+    }
+    const handleLogin = () => {
+        login(stateUsuario, stateClave);
     }
     return(
         <div className="loginLayout">
@@ -34,7 +38,7 @@ function Login(){
                 />
                 <IconButton 
                     id="login"
-                    onClick={(evt)=>{evt.preventDefault();console.log("it works");}}
+                    onClick={handleLogin}
                     name="Iniciar sesión"
                     icon="fa fa-sign-in"
                     type="IconButton"
