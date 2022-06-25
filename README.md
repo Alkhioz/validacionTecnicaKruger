@@ -1,0 +1,1 @@
+# Validación Técnica Kruger Corp. Inventario de vacunación de empleados
