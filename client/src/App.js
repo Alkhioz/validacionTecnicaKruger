@@ -11,6 +11,7 @@ function App() {
   const [stateCedulaError, setStateCedulaError] = useState("");
   
   const [stateNombre, setStateNombre] = useState("");
+  const [stateNombreError, setStateNombreError] = useState("");
 
   const [stateEmail, setStateEmail] = useState("");
   const [stateEmailError, setStateEmailError] = useState("");
@@ -24,20 +25,28 @@ function App() {
     }
   };
 
-  const onChangeCedula = (evt) => {
-    evt.preventDefault();
-    if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
-      setStateCedula(evt.target.value);
-  }
-
   const onChangeNombre = (evt) => {
     evt.preventDefault();
     if(isLetter(evt.target.value))
       setStateNombre(evt.target.value);
   }
 
+  const onBlurNombre = () => {
+    if(stateNombre === ""){
+      setStateNombreError("Este campo no puede quedar vacío");
+    }else{
+      setStateNombreError("");
+    }
+  }
+
   const onBlurCedula = () => {
     validarCedula();
+  }
+
+  const onChangeCedula = (evt) => {
+    evt.preventDefault();
+    if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
+      setStateCedula(evt.target.value);
   }
 
   const onChangeEmail = (evt) =>{
@@ -81,6 +90,8 @@ function App() {
         id="Nombre"
         value={stateNombre}
         onChange={onChangeNombre}
+        onBlur={onBlurNombre}
+        error={stateNombreError}
       />
       <Input 
         type="text"
