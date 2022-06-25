@@ -63,7 +63,7 @@ server.post('/login', (req, res) => {
     if(user === undefined){
         res.jsonp({
             msg: 'err',
-            data: {description: 'invalid user or password'}
+            data: {description: 'Usuario o contraseña incorrectos.'}
         });
     }else{
         let token = createToken(user.id)

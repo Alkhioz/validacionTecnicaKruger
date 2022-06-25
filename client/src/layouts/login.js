@@ -15,8 +15,15 @@ function Login(){
         evt.preventDefault();
         setStateClave(evt.target.value);
     }
-    const handleLogin = () => {
-        login(stateUsuario, stateClave);
+    const [stateError, setStateError] = useState("");
+    const handleLogin = async() => {
+        let authdata = await login(stateUsuario, stateClave);
+        if(authdata.msg === "ok"){
+            localStorage.setItem("token", authdata.data.token);
+            setStateError("");
+        }else{
+            setStateError(authdata.data.description);
+        }
     }
     return(
         <div className="loginLayout">
@@ -26,7 +33,7 @@ function Login(){
                     type="text"
                     name="Usuario"
                     id="usuario"
-                    value={stateUsuario}
+                    value={stateUsuario}invalid user or password
                     onChange={onChangeUsuario}
                 />
                 <Input 
@@ -43,6 +50,7 @@ function Login(){
                     icon="fa fa-sign-in"
                     type="IconButton"
                 />
+                {stateError!==""&&<p className="LoginError">{stateError}</p>}
             </div>
         </div>
     );
