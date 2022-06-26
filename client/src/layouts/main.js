@@ -11,6 +11,8 @@ function Inicio(){
     const { user, mutate, loggedOut, loading } = useUser();
     const [navState, setNavState] = useState(0);
     const [showMobileNavState, setShowMobileNavState] = useState(false);
+
+    const adminMenuItems = [{name:"Dashboard", icon: "fa fa-pie-chart"}, {name:"Usuarios", icon: "fa fa-users"}];
     
     const handleChangeNav = (evt) => {
         evt.preventDefault();
@@ -54,6 +56,7 @@ function Inicio(){
                     handleLogout={handleLogout}
                     selected={parseInt(navState)}
                     changeNav={handleChangeNav}
+                    menuItems={adminMenuItems}
                 />
                 <nav className="mainNav">
                     <h1 className="mainLogo noSelect">IVK</h1>

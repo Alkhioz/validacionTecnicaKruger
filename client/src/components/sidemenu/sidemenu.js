@@ -1,6 +1,9 @@
 import './sidemenu.css';
 
 export default (props)=>{
+    const protectedMenuItems = () => props.menuItems.map((item,i)=>{
+        return <button key={`protected_${i}`} className={props.selected===i?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={props.changeNav} value={i}>{item.name}<i className={item.icon} aria-hidden="true"></i></button>
+    });
     return(
         <div className="mainMobileMenu" style={{display: props.show?"block":"none"}}>
             <div className="mainMobileMenuCardHeader">
@@ -9,10 +12,7 @@ export default (props)=>{
             <div className="mainMobileMenuCard">
                 <p><b>Bienvenido </b>{props.name}</p>
                 <div className="sideMenu">
-                    {props.showProtected&&<>
-                        <button className={props.selected===0?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={props.changeNav} value="0">Dashboard<i className="fa fa-pie-chart" aria-hidden="true"></i></button>
-                        <button className={props.selected===1?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={props.changeNav} value="1">Usuarios<i className="fa fa-users" aria-hidden="true"></i></button>
-                    </>}
+                    {props.showProtected&&protectedMenuItems()}
                     <button className="sideMenuLogout" onClick={props.handleLogout} value="1">Salir<i className="fa fa-sign-out" aria-hidden="true"></i></button>
                 </div>
             </div>
