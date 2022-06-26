@@ -126,7 +126,7 @@ const Profile=(props)=>{
             }
         }
     }
-    /*Numero telefono*/
+    /*Fecha nacimiento*/
     const [stateFecha, setStateFecha] = useState("");
     const [stateFechaError, setStateFechaError] = useState("");
 
@@ -158,6 +158,22 @@ const Profile=(props)=>{
             setstateDireccionError("");
         }
     }
+    /*Fecha vacunacion*/
+    const [stateFechaVacunacion, setStateFechaVacunacion] = useState("");
+    const [stateFechaVacunacionError, setStateFechaVacunacionError] = useState("");
+
+    const onChangeFechaVacunacion = (evt) => {
+        evt.preventDefault();
+        setStateFechaVacunacion(evt.target.value);
+    }
+
+    const  onBlurFechaVacunacion = () => {
+        if(stateFechaVacunacion === ""){
+            setStateFechaVacunacionError("Seleccione una fecha valida");
+        }else{
+            setStateFechaVacunacionError("");
+        }
+    }
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
     useEffect(() => {
@@ -176,7 +192,7 @@ const Profile=(props)=>{
 
 
     const handleUpdateData=async()=>{
-        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === ""){
+        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || stateFechaVacunacion === ""){
             if(stateCedula === "")
                 setStateCedulaError("Debe rellenar este campo")
             if(stateNombre === "")
@@ -191,6 +207,8 @@ const Profile=(props)=>{
                 setstateDireccionError("Debe rellenar este campo")
             if(stateTelefono === "")
                 setstateTelefonoError("Debe rellenar este campo")
+            if(stateFechaVacunacion === "")
+                setStateFechaVacunacionError("Debe rellenar este campo")
             return false;
         }
         let data = {
@@ -292,6 +310,15 @@ const Profile=(props)=>{
                         onChange={onChangeDireccion}
                         onBlur={onBlurDireccion}
                         error={stateDireccionError}
+                    />
+                    <Input 
+                        type="date"
+                        name="Fecha Vacunación"
+                        id="fechavaccine"
+                        value={stateFechaVacunacion}
+                        onChange={onChangeFechaVacunacion}
+                        onBlur={onBlurFechaVacunacion}
+                        error={stateFechaVacunacionError}
                     />
                     <Select 
                         options={vaccines}
