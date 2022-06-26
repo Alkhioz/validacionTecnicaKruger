@@ -6,9 +6,10 @@ const Select =(props)=>{
     });
     return(
         <div className="Select">
-            <select>
+            <select id={props.id}>
                 {options()}
             </select>
+            <label htmlFor={props.id}>{props.name}</label>
         </div>
     );
 }

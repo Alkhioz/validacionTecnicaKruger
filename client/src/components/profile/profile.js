@@ -295,6 +295,8 @@ const Profile=(props)=>{
                     />
                     <Select 
                         options={vaccines}
+                        name={"Vacuna"}
+                        id="vacuna"
                     />
                 </div>
                 <div className="profileAction">
