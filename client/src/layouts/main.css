@@ -12,10 +12,6 @@
     margin: .6rem;
 }
 
-.mainControl{
-    background-color: var(--brand-color);
-}
-
 .mainUser{
     margin: .6rem;
     display: grid;
@@ -41,6 +37,34 @@
     color: var(--brand-color);
     background-color: var(--secondary-color);
     margin: 1rem;
+}
+.mainControl{
+    display: grid;
+    justify-content: center;
+    align-items: end;
+}
+.mainAdminMenu{
+    display: inline-block;
+    padding:0;
+}
+.mainAdminMenuItem{
+    padding: 1rem;
+    margin: auto 5px auto 5px;
+    border: none;
+    outline: none;
+    color: var(--brand-color);
+    background-color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.mainAdminMenuItem>i{
+    margin-left: .2rem;
+    margin-right: .2rem;
+    pointer-events: none;
+}
+
+.mainAdminMenuItem:hover{
+    color: var(--focus-color);
 }
 
 @media (max-width: 800px) {    

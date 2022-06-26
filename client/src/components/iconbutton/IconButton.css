@@ -11,6 +11,7 @@
 }
 .IconButton>i,.IconButtonAlter>i{
     margin-left: .2rem;
+    pointer-events: none;
 }
 .IconButton:hover{
     background-color: var(--focus-color);
