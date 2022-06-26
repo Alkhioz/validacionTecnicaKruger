@@ -174,6 +174,14 @@ const Profile=(props)=>{
             setStateFechaVacunacionError("");
         }
     }
+    /*Vaccine*/
+    const [stateVacuna, setStateVacuna] = useState(0);
+    //const [stateVacunaError, setStateVacunaError] = useState("");
+    
+    const onChangeVacuna = (evt) => {
+        evt.preventDefault();
+        setStateVacuna(evt.target.value);
+    }
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
     useEffect(() => {
@@ -324,6 +332,8 @@ const Profile=(props)=>{
                         options={vaccines}
                         name={"Vacuna"}
                         id="vacuna"
+                        value={stateVacuna}
+                        onChange={onChangeVacuna}
                     />
                 </div>
                 <div className="profileAction">
