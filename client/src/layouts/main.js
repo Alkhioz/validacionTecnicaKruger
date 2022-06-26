@@ -38,15 +38,7 @@ function Inicio(){
         evt.preventDefault();
         setShowMobileNavState(!showMobileNavState);
     }
-    
-    const makeAdminMenu=()=>{
-        return(
-            <div className="mainAdminMenu">
-                <button className={parseInt(navState)===0?"mainAdminMenuItem mainAdminMenuItemSelected":"mainAdminMenuItem"} onClick={handleChangeNav} value="0">Dashboard<i className="fa fa-pie-chart" aria-hidden="true"></i></button>
-                <button className={parseInt(navState)===1?"mainAdminMenuItem mainAdminMenuItemSelected":"mainAdminMenuItem"} onClick={handleChangeNav} value="1">Usuarios<i className="fa fa-users" aria-hidden="true"></i></button>
-            </div>
-        );
-    }
+
     return(
         loading?<Loading/>:
         (!loggedOut&&user)&&<div className="mainLayout">
@@ -69,18 +61,6 @@ function Inicio(){
                     changeNav={handleChangeNav}
                     menuItems={adminMenuItems}
                 />
-                {/*<nav className="mainNav">
-                    <h1 className="mainLogo noSelect">IVK</h1>
-                    <div className="mainControl">
-                        {(!loggedOut&&user.isAdmin)&&makeAdminMenu()}
-                    </div>
-                    <div className="mainUser">
-                        <p><b>Bienvenido </b>{user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>Salir</a></p>
-                    </div>
-                    <div className="mainResponsive">
-                        <button onClick={handleShowMobileMenu} className="mainBarButton"><i className="fa fa-bars"></i></button>
-                    </div>
-                </nav>*/}
         </div>
     );
 }
