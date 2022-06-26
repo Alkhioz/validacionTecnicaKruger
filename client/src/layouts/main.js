@@ -20,6 +20,7 @@ function Inicio(){
     }
 
     const navigate = useNavigate();
+    
     useEffect(() => {
         if (loggedOut) {
             navigate("/login");
@@ -51,8 +52,8 @@ function Inicio(){
                 <SideMenu
                     show={showMobileNavState}
                     handleShow={handleShowMobileMenu}
-                    name={user.name}
-                    showProtected={!loggedOut&&user.isAdmin}
+                    name={(!loggedOut&&user)?user.name:""}
+                    showProtected={(!loggedOut&&user)?(!loggedOut&&user.isAdmin):false}
                     handleLogout={handleLogout}
                     selected={parseInt(navState)}
                     changeNav={handleChangeNav}
@@ -64,7 +65,7 @@ function Inicio(){
                         {(!loggedOut&&user.isAdmin)&&makeAdminMenu()}
                     </div>
                     <div className="mainUser">
-                        <p><b>Bienvenido </b>{user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>Salir</a></p>
+                        <p><b>Bienvenido </b>{(!loggedOut&&user)&&user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>Salir</a></p>
                     </div>
                     <div className="mainResponsive">
                         <button onClick={handleShowMobileMenu} className="mainBarButton"><i className="fa fa-bars"></i></button>
