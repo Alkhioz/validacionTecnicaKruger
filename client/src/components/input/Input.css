@@ -58,3 +58,12 @@
 .InputError{
     color: var(--error-color);
 }
+input[type=date]{
+  color:var(--secondary-color);
+}
+input[type=date]:focus{
+  color:var(--tertiary-color);
+}
+input[type=date]:valid{
+  color:var(--tertiary-color);
+}

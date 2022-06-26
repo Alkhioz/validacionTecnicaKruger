@@ -53,7 +53,7 @@ function Inicio(){
                     menuItems={adminMenuItems}
                 />
                 <Profile
-                    isIncomplete={user.id}
+                    user={user}
                 />
         </div>
     );

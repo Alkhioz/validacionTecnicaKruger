@@ -1,0 +1,27 @@
+.profile{
+    width: 100%;
+    display: grid;
+    justify-items: center;
+}
+.profileCard{
+    margin-top:20px;
+    display: block;
+    width: calc(100% - 4rem);
+    max-width: 900px;
+    box-shadow: 0 4px 8px 0 var(--primary-color);
+    padding: 2rem;
+}
+.profileTittle{
+    font-size:2rem;
+    color: var(--focus-color);
+}
+.profileUserData{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(25%, min(170px, 100%)), 1fr));
+}
+.profileUserData>.Input{
+    margin: 1rem .5rem 0 .5rem;
+}
+.profileMissingData{
+    color: var(--error-color);
+}

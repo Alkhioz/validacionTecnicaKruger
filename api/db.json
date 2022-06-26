@@ -8,13 +8,13 @@
       "username": "ale01",
       "password": "Pass123.",
       "email": "admin@fakemail.com",
-      "dateOfBirth": "05/06/1988",
+      "dateOfBirth": "1998-06-30",
       "address": "Calle principal, Portoviejo",
       "phone": "+593998855662",
       "roleId": 1,
       "vaccine": {
         "type": 2,
-        "date": "15/06/2021"
+        "date": "2021-06-15"
       }
     },
     {
@@ -25,13 +25,13 @@
       "username": "alituma6548",
       "password": "Pass123.",
       "email": "alituma@gmail.com",
-      "dateOfBirth": "05/06/1990",
+      "dateOfBirth": "1990-01-30",
       "address": "Calle 13 y Avenida 14",
       "phone": "+593995421541",
       "roleId": 2,
       "vaccine": {
         "type": 3,
-        "date": "10/06/2021"
+        "date": "2021-06-15"
       }
     },
     {
