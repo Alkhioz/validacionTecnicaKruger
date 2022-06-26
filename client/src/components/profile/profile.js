@@ -33,7 +33,7 @@ const Profile=(props)=>{
         body: "Jhonson&Jhonson"
       }
     ];
-
+    
     const { profile, mutate, noData, loading } = useProfile(props.user.id);
 
     /*Cedula*/
@@ -193,6 +193,8 @@ const Profile=(props)=>{
             setStateFecha(profile.dateOfBirth);
             setstateTelefono(profile.phone);
             setstateDireccion(profile.address);
+            setStateVacuna(Object.keys(profile.vaccine).length > 0?profile.vaccine.type:0);
+            setStateFechaVacunacion(Object.keys(profile.vaccine).length > 0?profile.vaccine.date:"");
             if(profile.dateOfBirth === "" || profile.address === "" || profile.phone === "")
                 setStateMissingData("Debe terminar de llenar sus datos");
         }
