@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 const Profile=(props)=>{
     
-    const { profile, noData } = useProfile(props.user.id);
+    const { profile, noData, loading } = useProfile(props.user.id);
 
     useEffect(() => {
         if (profile && !noData) {
@@ -30,7 +30,7 @@ const Profile=(props)=>{
         }
     }, [profile, noData]);
 
-    const { vaccine, noDataVaccine } = useVaccine();
+    const { vaccine, noDataVaccine, loadingVaccine } = useVaccine();
 
     useEffect(() => {
         if (vaccine && !noDataVaccine) {
@@ -184,35 +184,42 @@ const Profile=(props)=>{
     }
     /*Vaccine*/
     const [stateVacuna, setStateVacuna] = useState(0);
-    //const [stateVacunaError, setStateVacunaError] = useState("");
+    const [stateVacunaError, setStateVacunaError] = useState("");
     
     const onChangeVacuna = (evt) => {
         evt.preventDefault();
         setStateVacuna(evt.target.value);
     }
+    const  onBlurVacuna = () => {
+        if(parseInt(stateVacuna) === 0){
+            setStateVacunaError("Debe seleccionar una vacuna");
+        }else{
+            setStateVacunaError("");
+        }
+    }
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
     
-
-
     const handleUpdateData=async()=>{
         if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || stateFechaVacunacion === ""){
             if(stateCedula === "")
-                setStateCedulaError("Debe rellenar este campo")
+                setStateCedulaError("Debe rellenar este campo");
             if(stateNombre === "")
-                setStateNombreError("Debe rellenar este campo")
+                setStateNombreError("Debe rellenar este campo");
             if(stateApellido === "")
-                setStateApellidoError("Debe rellenar este campo")
+                setStateApellidoError("Debe rellenar este campo");
             if(stateEmail === "")
-                setStateEmailError("Debe rellenar este campo")
+                setStateEmailError("Debe rellenar este campo");
             if(stateFecha === "")
-                setStateFechaError("Debe rellenar este campo")
+                setStateFechaError("Debe rellenar este campo");
             if(stateDireccion === "")
-                setstateDireccionError("Debe rellenar este campo")
+                setstateDireccionError("Debe rellenar este campo");
             if(stateTelefono === "")
-                setstateTelefonoError("Debe rellenar este campo")
+                setstateTelefonoError("Debe rellenar este campo");
             if(stateFechaVacunacion === "")
-                setStateFechaVacunacionError("Debe rellenar este campo")
+                setStateFechaVacunacionError("Debe colocar la fecha de vacunación");
+            if(parseInt(stateVacuna) === 0)
+                setStateVacunaError("Debe seleccionar una vacuna");
             return false;
         }
         let data = {
@@ -245,7 +252,7 @@ const Profile=(props)=>{
     }
 
     return(
-        <div className="profile">
+            (!loadingVaccine&&!loading)?<div className="profile">
             <div className="profileCard">
                 <h1 className="profileTittle">Datos de Usuario</h1>
                 {stateMissingData!==""&&<p className="profileMissingData">{stateMissingData}</p>}
@@ -330,6 +337,8 @@ const Profile=(props)=>{
                         id="vacuna"
                         value={stateVacuna}
                         onChange={onChangeVacuna}
+                        error={stateVacunaError}
+                        onBlur={onBlurVacuna}
                     />
                 </div>
                 <div className="profileAction">
@@ -342,7 +351,7 @@ const Profile=(props)=>{
                     />
                 </div>
             </div>
-        </div>
+        </div>:<></>
     );
 } 
 export default Profile;

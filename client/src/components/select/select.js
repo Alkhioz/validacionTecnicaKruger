@@ -6,10 +6,11 @@ const Select =(props)=>{
     });
     return(
         <div className="Select">
-            <select id={props.id} onChange={props.onChange} value={props.value}>
+            <select id={props.id} onBlur={props.onBlur} onChange={props.onChange} value={props.value}>
                 {options()}
             </select>
             <label htmlFor={props.id}>{props.name}</label>
+            {props.error !== "" && <p className="SelectError">{props.error}</p>}
         </div>
     );
 }

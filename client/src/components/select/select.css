@@ -27,3 +27,6 @@
     left: 5px;
     transition: 300ms ease all;
 }
+.SelectError{
+    color: var(--error-color);
+}
