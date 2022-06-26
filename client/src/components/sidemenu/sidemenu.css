@@ -1,0 +1,80 @@
+.sideMenu{
+    display: grid;
+    padding:0;
+}
+.sideMenuItem, .sideMenuLogout{
+    padding: 1rem;
+    margin: auto 5px auto 5px;
+    border: none;
+    outline: none;
+    color: var(--brand-color);
+    background-color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.sideMenuItem{
+    margin: 10px 5px auto 5px;
+    text-align: justify;
+    border-right: 10px solid var(--brand-color);
+    border-left: 2px solid var(--brand-color);
+}
+.sideMenuLogout{
+    margin: 20px 5px auto 5px;
+    outline: 1px solid var(--focus-color);
+    color: var(--focus-color);
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.sideMenuItem>i, .sideMenuLogout>i{
+    margin-left: .2rem;
+    margin-right: .2rem;
+    pointer-events: none;
+}
+
+
+.sideMenuItemSelected{
+    color: var(--focus-color);
+    border-right: 10px solid var(--focus-color);
+    border-left: 2px solid var(--focus-color);
+}
+
+.sideMenuContainer{
+    background-color: #000000a2;
+    backdrop-filter: blur(5px);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    transition: ease-in-out 0.25s;
+}
+.sideMenuContainerCard{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 90%;
+    max-width: 400px;
+    background-color:var(--secondary-color);
+    padding: 15px;
+}
+.sideMenuContainerCardHeader{
+    background-color:var(--brand-color);
+    width:100%;
+    margin: 0;
+    padding: 0;
+    width: 90%;
+    max-width: 400px;
+}
+.sideMenuContainerCardHeaderButton{
+    margin: 10px;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    background-color: var(--brand-color);
+    border: none;
+    outline: none;
+}
+.sideMenuContainerCardHeaderButton>i{
+    pointer-events: none;
+}

@@ -1,0 +1,95 @@
+.navBar{
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    border-bottom: 2px solid var(--brand-color);
+}
+.navBarLogo{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-color);
+    font-size: 2rem;
+    margin: .6rem;
+}
+
+.navBarUser{
+    margin: .6rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.navBarLogout{
+    color: var(--focus-color);
+    text-decoration: none;
+    display: block;
+}
+
+.navBarResponsive{
+    display: none;
+}
+
+.navBarResponsiveButton{
+    display: block;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    outline: none;
+    font-size: 2rem;
+    color: var(--brand-color);
+    background-color: var(--secondary-color);
+    margin: 1rem;
+}
+.navBarControl{
+    display: grid;
+    justify-content: center;
+    align-items: end;
+}
+
+.navBarProtected{
+    display: inline-block;
+    padding:0;
+}
+
+.navBarProtectedItem{
+    padding: 1rem;
+    margin: auto 5px auto 5px;
+    border: none;
+    outline: none;
+    color: var(--brand-color);
+    background-color: var(--secondary-color);
+    font-size: 1.2rem;
+}
+
+.navBarProtectedItem>i {
+    margin-left: .2rem;
+    margin-right: .2rem;
+    pointer-events: none;
+}
+
+.navBarProtectedItem:hover{
+    color: var(--focus-color);
+}
+
+.navBarProtectedItemSelected{
+    color: var(--focus-color);
+}
+
+@media (max-width: 800px) {    
+    .navBar{
+        grid-template-columns: 50% 50%;
+    }
+    
+    .navBarLogo{
+        justify-content: start;
+    }
+    .navBarControl{
+        display: none;
+    }
+    .navBarUser{
+        display: none;
+    }
+    .navBarResponsive{
+        display: grid;
+        align-items: center;
+        justify-items: end;
+    }
+}
