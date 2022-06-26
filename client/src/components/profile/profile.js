@@ -3,6 +3,7 @@ import useProfile from '../../data/use-profile';
 import { useEffect, useState } from 'react';
 import Input from '../input/Input';
 import IconButton from '../iconbutton/IconButton';
+import Select from '../select/select';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from '../../utilities/utilities';
 import verificarCedula from '../../utilities/validarCedula';
 import clienteAxios from "../../utilities/axios";
@@ -268,6 +269,7 @@ const Profile=(props)=>{
                         onBlur={onBlurDireccion}
                         error={stateDireccionError}
                     />
+                    <Select />
                 </div>
                 <div className="profileAction">
                     <IconButton 
