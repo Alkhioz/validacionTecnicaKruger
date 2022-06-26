@@ -1,15 +1,12 @@
 import './inicio.css';
 //import IconButton from '../components/iconbutton/IconButton.js';
-import useUser from '../data/use-user.js';
-import Loading from './loading.js';
 
 function Inicio(){
-    const { user, loggedOut, loading } = useUser();
-    
+
     return(
-        loading?<Loading/>:
-        <div className="loginLayout">
-                {(!loggedOut&&user)&&<p>{user.name}</p>}
+        <div className="inicioLayout">
+                <h1>Inventario de vacunación Kruger</h1>
+                <h2>Estado de vacunación a nivel empresarial</h2>
         </div>
     );
 }
