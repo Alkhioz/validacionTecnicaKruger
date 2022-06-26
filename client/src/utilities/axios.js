@@ -15,7 +15,7 @@ clienteAxios.interceptors.response.use(function (response) {
     }
     return response;
   }, function (error) {
-    return error;
+    Promise.reject(error)
 });
 
 const setAuthToken = token => {

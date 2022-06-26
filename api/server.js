@@ -29,7 +29,27 @@ const validateToken = (token) => jwt.verify(token, secret, (err, decoded)=>{
 })
 
 const auth = (req, res, next) => {
-    let decoded = validateToken(req.headers["access-token"])
+    const bearerHeader = req.headers['authorization'];
+    if(typeof bearerHeader !== 'undefined'){
+        const bearer = bearerHeader.split(' ');
+        const token = bearer[1];
+        let decoded = validateToken(token);
+        if (decoded) {
+            req.decoded = decoded.data
+            next()
+        } else {
+            res.jsonp({
+                msg: 'err',
+                data: {description: 'invalid token'}
+            });
+        }
+    }else{
+        res.jsonp({
+            msg: 'err',
+            data: {description: 'invalid token'}
+        });
+    }
+    /*let decoded = validateToken(req.headers["access-token"])
     if (decoded) {
         req.decoded = decoded.data
         next()
@@ -38,7 +58,7 @@ const auth = (req, res, next) => {
             msg: 'err',
             data: {description: 'invalid token'}
         });
-    }
+    }*/
 }
 
 const isAdmin = (req, res, next) => {
