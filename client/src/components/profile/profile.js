@@ -10,6 +10,30 @@ import clienteAxios from "../../utilities/axios";
 import Swal from "sweetalert2";
 
 const Profile=(props)=>{
+
+    const vaccines=[
+      {
+        id: 0,
+        body: "Seleccione la vacuna"
+      },
+      {
+        id: 1,
+        body: "Sputnik"
+      },
+      {
+        id: 2,
+        body: "AstraZeneca"
+      },
+      {
+        id: 3,
+        body: "Pfizer"
+      },
+      {
+        id: 4,
+        body: "Jhonson&Jhonson"
+      }
+    ];
+
     const { profile, mutate, noData, loading } = useProfile(props.user.id);
 
     /*Cedula*/
@@ -269,7 +293,9 @@ const Profile=(props)=>{
                         onBlur={onBlurDireccion}
                         error={stateDireccionError}
                     />
-                    <Select />
+                    <Select 
+                        options={vaccines}
+                    />
                 </div>
                 <div className="profileAction">
                     <IconButton 
