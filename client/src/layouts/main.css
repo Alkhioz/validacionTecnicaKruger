@@ -49,11 +49,7 @@
     padding:0;
 }
 
-.mainAdminMenuMobile{
-    display: grid;
-    padding:0;
-}
-.mainAdminMenuItemMobile, .mainAdminMenuItem, .mainLogoutMobile{
+.mainAdminMenuItem{
     padding: 1rem;
     margin: auto 5px auto 5px;
     border: none;
@@ -63,22 +59,7 @@
     font-size: 1.2rem;
 }
 
-
-.mainAdminMenuItemMobile{
-    margin: 10px 5px auto 5px;
-    text-align: justify;
-    border-right: 10px solid var(--brand-color);
-    border-left: 2px solid var(--brand-color);
-}
-.mainLogoutMobile{
-    margin: 20px 5px auto 5px;
-    outline: 1px solid var(--focus-color);
-    color: var(--focus-color);
-    background-color: var(--secondary-color);
-    text-align: center;
-}
-
-.mainAdminMenuItem>i, .mainAdminMenuItemMobile>i, .mainLogoutMobile>i{
+.mainAdminMenuItem>i {
     margin-left: .2rem;
     margin-right: .2rem;
     pointer-events: none;
