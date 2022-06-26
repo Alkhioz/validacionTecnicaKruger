@@ -48,12 +48,12 @@ function Inicio(){
     }
     return(
         loading?<Loading/>:
-        <div className="mainLayout">
+        (!loggedOut&&user)&&<div className="mainLayout">
                 <SideMenu
                     show={showMobileNavState}
                     handleShow={handleShowMobileMenu}
-                    name={(!loggedOut&&user)?user.name:""}
-                    showProtected={(!loggedOut&&user)?(!loggedOut&&user.isAdmin):false}
+                    name={user.name}
+                    showProtected={!loggedOut&&user.isAdmin}
                     handleLogout={handleLogout}
                     selected={parseInt(navState)}
                     changeNav={handleChangeNav}
@@ -65,7 +65,7 @@ function Inicio(){
                         {(!loggedOut&&user.isAdmin)&&makeAdminMenu()}
                     </div>
                     <div className="mainUser">
-                        <p><b>Bienvenido </b>{(!loggedOut&&user)&&user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>Salir</a></p>
+                        <p><b>Bienvenido </b>{user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>Salir</a></p>
                     </div>
                     <div className="mainResponsive">
                         <button onClick={handleShowMobileMenu} className="mainBarButton"><i className="fa fa-bars"></i></button>
