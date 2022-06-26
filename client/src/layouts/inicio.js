@@ -1,11 +1,13 @@
 import './inicio.css';
 //import IconButton from '../components/iconbutton/IconButton.js';
-import useUser from '../hooks/use-user.js';
+import useUser from '../data/use-user.js';
+import Loading from './loading.js';
 
 function Inicio(){
-    const { user, loggedOut } = useUser();
+    const { user, loggedOut, loading } = useUser();
     
     return(
+        loading?<Loading/>:
         <div className="loginLayout">
                 {(!loggedOut&&user)&&<p>{user.name}</p>}
         </div>

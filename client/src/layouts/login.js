@@ -8,13 +8,13 @@ import useUser from '../data/use-user.js';
 import Loading from './loading.js';
 
 function Login(){
-    const { user, mutate, loggedOut } = useUser();
+    const { user, mutate, loggedOut, loading } = useUser();
     const navigate = useNavigate();
     useEffect(() => {
         if (user && !loggedOut) {
             navigate("/main");
         }
-    }, [user, loggedOut]);
+    }, [user, loggedOut, loading]);
     
     const [stateUsuario, setStateUsuario] = useState("");
     const [stateClave, setStateClave] = useState("");
@@ -42,7 +42,7 @@ function Login(){
     }
     
     return(
-        true?<Loading/>:
+        loading?<Loading/>:
         <div className="loginLayout">
             <div className="loginCard">
                 <h1 className="loginTitle">Login IVK</h1>
