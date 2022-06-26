@@ -1,6 +1,5 @@
 import './sidemenu.css';
-
-export default (props)=>{
+const sideMenu = (props)=>{
     const protectedMenuItems = () => props.menuItems.map((item,i)=>{
         return <button key={`protected_${i}`} className={props.selected===i?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={props.changeNav} value={i}>{item.name}<i className={item.icon} aria-hidden="true"></i></button>
     });
@@ -19,3 +18,4 @@ export default (props)=>{
         </div>
     );
 }
+export default sideMenu;
