@@ -15,15 +15,23 @@ clienteAxios.interceptors.response.use(function (response) {
     }
     return response;
   }, function (error) {
-    return error;
+    return Promise.reject(error);
 });
 
-const setAuthToken = token => {
-    if(token) {
-        clienteAxios.defaults.headers.common['access-token'] = token;
-    } else {
-        delete clienteAxios.defaults.headers.common['access-token'];
-    }
-}
 
-export {clienteAxios, setAuthToken};
+clienteAxios.interceptors.request.use(
+    async config => {
+        if (localStorage.getItem("token") !== null) {
+            config.headers = {
+                'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            };
+        }
+        return config;
+    },
+error => {
+    return Promise.reject(error);
+});
+
+export default clienteAxios;

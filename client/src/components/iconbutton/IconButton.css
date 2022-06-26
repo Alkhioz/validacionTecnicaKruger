@@ -10,7 +10,7 @@
     font-weight: bold;
 }
 .IconButton>i,.IconButtonAlter>i{
-    margin-left: .5rem;
+    margin-left: .2rem;
 }
 .IconButton:hover{
     background-color: var(--focus-color);
@@ -22,19 +22,19 @@
 .IconButtonAlter{
     display: inline-block;
     background-color: var(--secondary-color);
-    color: var(--brand-color);
+    color: var(--focus-color);
     padding: 1rem;
     border: none;
-    outline: 2px solid var(--brand-color);
+    outline: 2px solid var(--focus-color);
     border-radius:100vmax;
     width: 100%;
     font-weight: bold;
 }
 .IconButtonAlter:hover{
-    color: var(--focus-color);
-    outline: 2px solid var(--focus-color);
+    color: var(--brand-color);
+    outline: 2px solid var(--brand-color);
 }
 .IconButtonAlter:focus{
-    color: var(--focus-color);
-    outline: 2px solid var(--focus-color);
+    color: var(--brand-color);
+    outline: 2px solid var(--brand-color);
 }

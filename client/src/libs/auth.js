@@ -1,4 +1,4 @@
-import { clienteAxios } from "../utilities/axios";
+import clienteAxios from "../utilities/axios";
 
 const login = async (username, password) => {
     try {

@@ -9,7 +9,7 @@ var corsOptions = {
     credentials: true,
     origin: "*",
     methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: 'accept, content-type'
+    allowedHeaders: 'accept, content-type, authorization'
 };
 
 server.use(cors(corsOptions));
@@ -29,15 +29,19 @@ const validateToken = (token) => jwt.verify(token, secret, (err, decoded)=>{
 })
 
 const auth = (req, res, next) => {
-    let decoded = validateToken(req.headers["access-token"])
-    if (decoded) {
-        req.decoded = decoded.data
-        next()
-    } else {
-        res.jsonp({
-            msg: 'err',
-            data: {description: 'invalid token'}
-        });
+    const bearerHeader = req.headers['authorization'];
+    if(typeof bearerHeader !== 'undefined'){
+        const bearer = bearerHeader.split(' ');
+        const token = bearer[1];
+        let decoded = validateToken(token);
+        if (decoded) {
+            req.decoded = decoded.data
+            next()
+        } else {
+            res.sendStatus(403);
+        }
+    }else{
+        res.sendStatus(403);
     }
 }
 
@@ -82,7 +86,7 @@ server.get('/getCurrentUserData', auth, (req, res) => {
     })
 
     let response = {
-        name: `${user.name} ${user.lastname}`,
+        name: `${user.username}`,
         isAdmin: user.roleId === 1 ? true:false,
         isIncomplete: user.dateOfBirth === "" || user.address === "" || user.phone === ""
     }
@@ -102,7 +106,8 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
             phone: user.phone,
             birth: user.dateOfBirth,
             isAdmin: user.roleId === 1 ? true : false,
-            vaccination: user.vaccine === ""?{status:false}:{status:true, vaccine:user.vaccine}
+            needUpdate: user.dateOfBirth === "" || user.address === "" || user.phone === "",
+            vaccination: Object.keys(user.vaccine).length === 0 ?{status:false}:{status:true, vaccine:user.vaccine}
         }
         return data
     })
