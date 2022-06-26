@@ -6,6 +6,7 @@ import {useEffect, useState} from 'react';
 import Loading from './loading';
 import MainNavigation from '../components/mainnavigation/mainnavigation';
 import Profile from '../components/profile/profile';
+import Users from '../components/users/users';
 
 function Inicio(){
     const {user, mutateUser, loggedOut, loading } = useUser();
@@ -57,7 +58,9 @@ function Inicio(){
                 />
                 {isAdminState?
                 <>
-                    {parseInt(navState)===2&&<Profile user={user} />}
+                    {parseInt(navState)===0&&<p>Dashboard</p>}
+                    {parseInt(navState)===1&&<Users/>}
+                    {parseInt(navState)===2&&<Profile user={user}/>}
                 </>:
                 <Profile user={user} />}
                 

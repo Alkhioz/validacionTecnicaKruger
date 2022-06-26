@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import clienteAxios from "../utilities/axios.js";
 
-export default function useUser() {
+function useUser() {
   const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
 
   const { data, mutate, error } = useSWR("/getCurrentUserData", fetcher);
@@ -15,3 +15,5 @@ export default function useUser() {
     mutateUser: mutate
   };
 }
+
+export default useUser;

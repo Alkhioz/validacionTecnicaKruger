@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import clienteAxios from "../utilities/axios.js";
 
-export default function useProfile(userId) {
+function useProfile(userId) {
   const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
 
   const { data, mutate, error } = useSWR(`/user/${userId}`, fetcher);
@@ -15,3 +15,5 @@ export default function useProfile(userId) {
     mutateProfile: mutate
   };
 }
+
+export default useProfile;

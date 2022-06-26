@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import clienteAxios from "../utilities/axios.js";
 
-export default function useVaccine() {
+function useVaccine() {
   const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
 
   const { data, mutate, error } = useSWR("/vaccine", fetcher);
@@ -15,3 +15,5 @@ export default function useVaccine() {
     mutateVaccine: mutate
   };
 }
+
+export default useVaccine;
