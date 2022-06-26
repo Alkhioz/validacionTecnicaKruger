@@ -35,6 +35,18 @@ function Inicio(){
         setShowMobileNavState(!showMobileNavState);
     }
 
+    const makeAdminMenuMobile=()=>{
+        return(
+            <div className="mainAdminMenuMobile">
+                 {(!loggedOut&&user.isAdmin)&&<>
+                    <button className={parseInt(navState)===0?"mainAdminMenuItemMobile mainAdminMenuItemSelected":"mainAdminMenuItemMobile"} onClick={handleChangeNav} value="0">Dashboard<i className="fa fa-pie-chart" aria-hidden="true"></i></button>
+                    <button className={parseInt(navState)===1?"mainAdminMenuItemMobile mainAdminMenuItemSelected":"mainAdminMenuItemMobile"} onClick={handleChangeNav} value="1">Usuarios<i className="fa fa-users" aria-hidden="true"></i></button>
+                </>}
+                <button className="mainLogoutMobile" onClick={handleLogout} value="1">Salir<i className="fa fa-sign-out" aria-hidden="true"></i></button>
+            </div>
+        );
+    }
+
     const makeMobileMenu=()=>{
         return(
             <div className="mainMobileMenu" style={{display: showMobileNavState?"block":"none"}}>
@@ -43,14 +55,7 @@ function Inicio(){
                 </div>
                 <div className="mainMobileMenuCard">
                     <p><b>Bienvenido </b>{user.name}</p>
-                    {(!loggedOut&&user.isAdmin)&&<p>admin</p>}
-                    <IconButton 
-                        id="logout_mobile"
-                        name="Salir"
-                        icon="fa fa-sign-out"
-                        type="IconButtonAlter"
-                        onClick={handleLogout}
-                    />
+                    {makeAdminMenuMobile()}
                 </div>
             </div>
         );
