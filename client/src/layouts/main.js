@@ -4,8 +4,7 @@ import { useNavigate  } from "react-router-dom";
 import useUser from '../data/use-user.js';
 import {useEffect, useState} from 'react';
 import Loading from './loading.js';
-import SideMenu from '../components/sidemenu/sidemenu.js';
-import NavBar from '../components/navbar/navbar.js';
+import MainNavigation from '../components/mainnavigation/mainnavigation.js';
 
 function Inicio(){
 
@@ -42,17 +41,8 @@ function Inicio(){
     return(
         loading?<Loading/>:
         (!loggedOut&&user)&&<div className="mainLayout">
-                <SideMenu
+                <MainNavigation
                     show={showMobileNavState}
-                    handleShow={handleShowMobileMenu}
-                    name={user.name}
-                    showProtected={!loggedOut&&user.isAdmin}
-                    handleLogout={handleLogout}
-                    selected={parseInt(navState)}
-                    changeNav={handleChangeNav}
-                    menuItems={adminMenuItems}
-                />
-                <NavBar
                     handleShow={handleShowMobileMenu}
                     name={user.name}
                     showProtected={!loggedOut&&user.isAdmin}
