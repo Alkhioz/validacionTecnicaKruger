@@ -1,21 +1,13 @@
 import './inicio.css';
-import IconButton from '../components/iconbutton/IconButton.js';
-import {logout} from '../libs/auth.js';
+//import IconButton from '../components/iconbutton/IconButton.js';
+import useUser from '../hooks/use-user.js';
 
 function Inicio(){
+    const { user, loggedOut } = useUser();
     
-    const handleLogout = () => {
-        logout();
-    }
     return(
         <div className="loginLayout">
-                <IconButton 
-                    id="logout"
-                    onClick={handleLogout}
-                    name="Cerrar sesión"
-                    icon="fa fa-sign-in"
-                    type="IconButton"
-                />
+                {(!loggedOut&&user)&&<p>{user.name}</p>}
         </div>
     );
 }

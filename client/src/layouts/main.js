@@ -9,8 +9,6 @@ function Inicio(){
 
     const { user, mutate, loggedOut } = useUser();
     const navigate = useNavigate();
-    console.log(user);
-    console.log(loggedOut);
     useEffect(() => {
         if (loggedOut) {
             navigate("/login");

@@ -4,7 +4,8 @@ import Input from '../components/input/Input.js';
 import { useState, useEffect } from 'react';
 import {login} from '../libs/auth.js';
 import { useNavigate  } from "react-router-dom";
-import useUser from '../hooks/use-user.js';
+import useUser from '../data/use-user.js';
+import Loading from './loading.js';
 
 function Login(){
     const { user, mutate, loggedOut } = useUser();
@@ -41,6 +42,7 @@ function Login(){
     }
     
     return(
+        true?<Loading/>:
         <div className="loginLayout">
             <div className="loginCard">
                 <h1 className="loginTitle">Login IVK</h1>
