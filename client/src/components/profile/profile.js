@@ -5,6 +5,8 @@ import Input from '../input/Input';
 import IconButton from '../iconbutton/IconButton';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from '../../utilities/utilities';
 import verificarCedula from '../../utilities/validarCedula';
+import clienteAxios from "../../utilities/axios.js";
+import Swal from "sweetalert2";
 
 const Profile=(props)=>{
     const { profile, mutate, noData, loading } = useProfile(props.user.id);
@@ -148,7 +150,7 @@ const Profile=(props)=>{
     }, [profile, noData, loading]);
 
 
-    const handleUpdateData=()=>{
+    const handleUpdateData=async()=>{
         if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === ""){
             if(stateCedula === "")
                 setStateCedulaError("Debe rellenar este campo")
@@ -175,7 +177,24 @@ const Profile=(props)=>{
             address: stateDireccion,
             phone: stateTelefono
         };
-        console.log(data);
+        const actualizarDatos = await clienteAxios.patch(`/user/${profile.id}`,data);
+        if(actualizarDatos.status === 200){
+            Swal.fire({
+                title: 'Información registrada',
+                text: 'Se actualizaron los datos del usuario',
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        }else{
+            Swal.fire({
+                title: 'No se pudo registrar los datos',
+                text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                icon: 'info',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        }
     }
 
     return(

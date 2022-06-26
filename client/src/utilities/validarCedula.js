@@ -2,14 +2,14 @@
 //https://www.jybaro.com/blog/cedula-de-identidad-ecuatoriana/
 const validarCedula = (cedula) => {
     //Check DNI length
-    if(cedula.length!=10)
+    if(cedula.length!==10)
         return {
             status: false,
             msg: "La cédula debe tener 10 Digitos"
         };
     //Check Cod Provincia
     let codProvincia = cedula.substring(0,2);
-    if((codProvincia < 1 || codProvincia > 24) && codProvincia!=30)
+    if((codProvincia < 1 || codProvincia > 24) && parseInt(codProvincia)!==30)
         return {
             status: false,
             msg: "La cédula no pertenece a una región valida"
@@ -27,7 +27,7 @@ const validarCedula = (cedula) => {
     let remainder = [...odds, ...evens].reduce((partialSum, a) => partialSum + a, 0) % 10;
     let validationDigit = remainder === 0?0:10-remainder;
     
-    if(validationDigit != cedula[9])
+    if(parseInt(validationDigit) !== parseInt(cedula[9]))
         return {
             status: false,
             msg: "No coincide el dígito verificador"
