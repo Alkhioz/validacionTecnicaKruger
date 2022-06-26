@@ -9,7 +9,7 @@ import Profile from '../components/profile/profile';
 
 function Inicio(){
 
-    const { user, mutate, loggedOut, loading } = useUser();
+    const { user, mutateUser, loggedOut, loading } = useUser();
     const [navState, setNavState] = useState(0);
     const [showMobileNavState, setShowMobileNavState] = useState(false);
 
@@ -31,7 +31,7 @@ function Inicio(){
     const handleLogout = (evt) => {
         evt.preventDefault();
         logout();
-        mutate("/getCurrentUserData");
+        mutateUser("/getCurrentUserData");
     }
 
     const handleShowMobileMenu=(evt)=> {

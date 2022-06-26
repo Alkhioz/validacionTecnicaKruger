@@ -1,5 +1,6 @@
 import './profile.css';
 import useProfile from '../../data/use-profile';
+import useVaccine from '../../data/use-vaccine';
 import { useEffect, useState } from 'react';
 import Input from '../input/Input';
 import IconButton from '../iconbutton/IconButton';
@@ -10,31 +11,38 @@ import clienteAxios from "../../utilities/axios";
 import Swal from "sweetalert2";
 
 const Profile=(props)=>{
-
-    const vaccines=[
-      {
-        id: 0,
-        body: "Seleccione la vacuna"
-      },
-      {
-        id: 1,
-        body: "Sputnik"
-      },
-      {
-        id: 2,
-        body: "AstraZeneca"
-      },
-      {
-        id: 3,
-        body: "Pfizer"
-      },
-      {
-        id: 4,
-        body: "Jhonson&Jhonson"
-      }
-    ];
     
-    const { profile, mutate, noData, loading } = useProfile(props.user.id);
+    const { profile, noData } = useProfile(props.user.id);
+
+    useEffect(() => {
+        if (profile && !noData) {
+            setStateCedula(profile.dni);
+            setStateNombre(profile.name);
+            setStateApellido(profile.lastname);
+            setStateEmail(profile.email);
+            setStateFecha(profile.dateOfBirth);
+            setstateTelefono(profile.phone);
+            setstateDireccion(profile.address);
+            setStateVacuna(Object.keys(profile.vaccine).length > 0?profile.vaccine.type:0);
+            setStateFechaVacunacion(Object.keys(profile.vaccine).length > 0?profile.vaccine.date:"");
+            if(profile.dateOfBirth === "" || profile.address === "" || profile.phone === "")
+                setStateMissingData("Debe terminar de llenar sus datos");
+        }
+    }, [profile, noData]);
+
+    const { vaccine, noDataVaccine } = useVaccine();
+
+    useEffect(() => {
+        if (vaccine && !noDataVaccine) {
+            setStateVaccines([{
+                id: 0,
+                body: "Seleccione la vacuna"
+              },
+              ...vaccine]);
+        }
+    }, [vaccine, noDataVaccine]);
+
+    const [stateVaccines, setStateVaccines] = useState([]);
 
     /*Cedula*/
     const [stateCedula, setStateCedula] = useState("");
@@ -184,21 +192,7 @@ const Profile=(props)=>{
     }
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
-    useEffect(() => {
-        if (profile && !noData) {
-            setStateCedula(profile.dni);
-            setStateNombre(profile.name);
-            setStateApellido(profile.lastname);
-            setStateEmail(profile.email);
-            setStateFecha(profile.dateOfBirth);
-            setstateTelefono(profile.phone);
-            setstateDireccion(profile.address);
-            setStateVacuna(Object.keys(profile.vaccine).length > 0?profile.vaccine.type:0);
-            setStateFechaVacunacion(Object.keys(profile.vaccine).length > 0?profile.vaccine.date:"");
-            if(profile.dateOfBirth === "" || profile.address === "" || profile.phone === "")
-                setStateMissingData("Debe terminar de llenar sus datos");
-        }
-    }, [profile, noData, loading]);
+    
 
 
     const handleUpdateData=async()=>{
@@ -331,7 +325,7 @@ const Profile=(props)=>{
                         error={stateFechaVacunacionError}
                     />
                     <Select 
-                        options={vaccines}
+                        options={stateVaccines}
                         name={"Vacuna"}
                         id="vacuna"
                         value={stateVacuna}

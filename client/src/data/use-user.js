@@ -12,6 +12,6 @@ export default function useUser() {
     loading,
     loggedOut,
     user: data,
-    mutate
+    mutateUser: mutate
   };
 }

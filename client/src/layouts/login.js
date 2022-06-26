@@ -8,7 +8,7 @@ import useUser from '../data/use-user';
 import Loading from './loading';
 
 function Login(){
-    const { user, mutate, loggedOut, loading } = useUser();
+    const { user, mutateUser, loggedOut, loading } = useUser();
     const navigate = useNavigate();
     useEffect(() => {
         if (user && !loggedOut) {
@@ -36,7 +36,7 @@ function Login(){
         let authdata = await login(stateUsuario, stateClave);
         if(authdata.msg === "ok"){
             localStorage.setItem("token", authdata.data.token);
-            mutate("/getCurrentUserData");
+            mutateUser("/getCurrentUserData");
         }else{
             setStateError(authdata.data.description);
         }

@@ -1,17 +1,17 @@
 import useSWR from "swr";
 import clienteAxios from "../utilities/axios.js";
 
-export default function useProfile(userId) {
+export default function useVaccine() {
   const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
 
-  const { data, mutate, error } = useSWR(`/user/${userId}`, fetcher);
+  const { data, mutate, error } = useSWR("/vaccine", fetcher);
   const loading = !data && !error;
   const noData = error && error.response.status === 403;
   
   return {
-    loading,
-    noData,
-    profile: data,
-    mutateProfile: mutate
+    loadingVaccine: loading,
+    noDataVaccine: noData,
+    vaccine: data,
+    mutateVaccine: mutate
   };
 }
