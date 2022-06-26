@@ -219,6 +219,15 @@ const Profile=(props)=>{
                         error={stateDireccionError}
                     />
                 </div>
+                <div className="profileAction">
+                    <IconButton 
+                        id="updateUserInfo"
+                        onClick={(evt)=>{evt.preventDefault();console.log("it works");}}
+                        name="Actualizar Datos"
+                        icon="fa fa-pencil"
+                        type="IconButton"
+                    />
+                </div>
             </div>
         </div>
     );
