@@ -25,9 +25,14 @@ function Inicio(){
         <div className="mainLayout">
                 <nav className="mainNav">
                     <h1 className="mainLogo noSelect">IVK</h1>
-                    <div></div>
+                    <div className="mainControl">
+
+                    </div>
                     <div className="mainUser">
                         <p><b>Welcome </b>{user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>logout</a></p>
+                    </div>
+                    <div className="mainResponsive">
+                        <button className="mainBarButton"><i className="fa fa-bars"></i></button>
                     </div>
                 </nav>
                 

@@ -4,9 +4,16 @@
     border-bottom: 2px solid var(--brand-color);
 }
 .mainLogo{
+    display: grid;
+    align-items: center;
+    justify-content: center;
     color: var(--brand-color);
     font-size: 2rem;
     margin: .6rem;
+}
+
+.mainControl{
+    background-color: var(--brand-color);
 }
 
 .mainUser{
@@ -19,4 +26,40 @@
     color: var(--focus-color);
     text-decoration: none;
     display: block;
+}
+
+.mainResponsive{
+    display: none;
+}
+
+.mainBarButton{
+    display: block;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    outline: none;
+    font-size: 2rem;
+    color: var(--brand-color);
+    background-color: var(--secondary-color);
+    margin: 1rem;
+}
+
+@media (max-width: 800px) {    
+    .mainNav{
+        grid-template-columns: 50% 50%;
+    }
+    
+    .mainLogo{
+        justify-content: start;
+    }
+    .mainControl{
+        display: none;
+    }
+    .mainUser{
+        display: none;
+    }
+    .mainResponsive{
+        display: grid;
+        align-items: center;
+        justify-items: end;
+    }
 }
