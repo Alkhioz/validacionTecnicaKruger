@@ -229,7 +229,11 @@ const Profile=(props)=>{
             email: stateEmail,
             dateOfBirth: stateFecha,
             address: stateDireccion,
-            phone: stateTelefono
+            phone: stateTelefono,
+            vaccine: {
+              type: stateVacuna,
+              date: stateFechaVacunacion
+            }
         };
         const actualizarDatos = await clienteAxios.patch(`/user/${profile.id}`,data);
         if(actualizarDatos.status === 200){
