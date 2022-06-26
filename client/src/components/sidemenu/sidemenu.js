@@ -4,11 +4,11 @@ const sideMenu = (props)=>{
         return <button key={`protected_${i}`} className={props.selected===i?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={props.changeNav} value={i}>{item.name}<i className={item.icon} aria-hidden="true"></i></button>
     });
     return(
-        <div className="mainMobileMenu" style={{display: props.show?"block":"none"}}>
-            <div className="mainMobileMenuCardHeader">
-                    <button className="mainMobileMenuCardHeaderButton" onClick={props.handleShow}><i className="fa fa-times-circle" aria-hidden="true"></i></button>
+        <div className="sideMenuContainer" style={{display: props.show?"block":"none"}}>
+            <div className="sideMenuContainerCardHeader">
+                    <button className="sideMenuContainerCardHeaderButton" onClick={props.handleShow}><i className="fa fa-times-circle" aria-hidden="true"></i></button>
             </div>
-            <div className="mainMobileMenuCard">
+            <div className="sideMenuContainerCard">
                 <p><b>Bienvenido </b>{props.name}</p>
                 <div className="sideMenu">
                     {props.showProtected&&protectedMenuItems()}

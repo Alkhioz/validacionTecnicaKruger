@@ -5,6 +5,7 @@ import useUser from '../data/use-user.js';
 import {useEffect, useState} from 'react';
 import Loading from './loading.js';
 import SideMenu from '../components/sidemenu/sidemenu.js';
+import NavBar from '../components/navbar/navbar.js';
 
 function Inicio(){
 
@@ -59,7 +60,16 @@ function Inicio(){
                     changeNav={handleChangeNav}
                     menuItems={adminMenuItems}
                 />
-                <nav className="mainNav">
+                <NavBar
+                    handleShow={handleShowMobileMenu}
+                    name={user.name}
+                    showProtected={!loggedOut&&user.isAdmin}
+                    handleLogout={handleLogout}
+                    selected={parseInt(navState)}
+                    changeNav={handleChangeNav}
+                    menuItems={adminMenuItems}
+                />
+                {/*<nav className="mainNav">
                     <h1 className="mainLogo noSelect">IVK</h1>
                     <div className="mainControl">
                         {(!loggedOut&&user.isAdmin)&&makeAdminMenu()}
@@ -70,7 +80,7 @@ function Inicio(){
                     <div className="mainResponsive">
                         <button onClick={handleShowMobileMenu} className="mainBarButton"><i className="fa fa-bars"></i></button>
                     </div>
-                </nav>
+                </nav>*/}
         </div>
     );
 }
