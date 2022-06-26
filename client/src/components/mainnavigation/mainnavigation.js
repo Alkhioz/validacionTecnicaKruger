@@ -1,5 +1,5 @@
-import SideMenu from '../sidemenu/sidemenu.js';
-import NavBar from '../navbar/navbar.js';
+import SideMenu from '../sidemenu/sidemenu';
+import NavBar from '../navbar/navbar';
 
 const mainNavigation = (props) => {
     return(

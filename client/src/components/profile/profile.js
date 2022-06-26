@@ -1,11 +1,11 @@
 import './profile.css';
-import useProfile from '../../data/use-profile.js';
+import useProfile from '../../data/use-profile';
 import { useEffect, useState } from 'react';
 import Input from '../input/Input';
 import IconButton from '../iconbutton/IconButton';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from '../../utilities/utilities';
 import verificarCedula from '../../utilities/validarCedula';
-import clienteAxios from "../../utilities/axios.js";
+import clienteAxios from "../../utilities/axios";
 import Swal from "sweetalert2";
 
 const Profile=(props)=>{

@@ -7,9 +7,9 @@ import verificarCedula from './utilities/validarCedula';
 import { useState } from 'react';*/
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from './layouts/login.js';
-import Inicio from './layouts/inicio.js';
-import Main from './layouts/main.js';
+import Login from './layouts/login';
+import Inicio from './layouts/inicio';
+import Main from './layouts/main';
 
 
 function App() {
