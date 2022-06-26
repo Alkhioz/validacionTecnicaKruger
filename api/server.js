@@ -9,7 +9,7 @@ var corsOptions = {
     credentials: true,
     origin: "*",
     methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE'],
-    allowedHeaders: 'accept, content-type'
+    allowedHeaders: 'accept, content-type, authorization'
 };
 
 server.use(cors(corsOptions));
@@ -49,16 +49,6 @@ const auth = (req, res, next) => {
             data: {description: 'invalid token'}
         });
     }
-    /*let decoded = validateToken(req.headers["access-token"])
-    if (decoded) {
-        req.decoded = decoded.data
-        next()
-    } else {
-        res.jsonp({
-            msg: 'err',
-            data: {description: 'invalid token'}
-        });
-    }*/
 }
 
 const isAdmin = (req, res, next) => {
