@@ -15,7 +15,7 @@ clienteAxios.interceptors.response.use(function (response) {
     }
     return response;
   }, function (error) {
-    Promise.reject(error)
+    return Promise.reject(error);
 });
 
 
@@ -31,15 +31,7 @@ clienteAxios.interceptors.request.use(
         return config;
     },
 error => {
-    Promise.reject(error)
+    return Promise.reject(error);
 });
-
-const setAuthToken = token => {
-    if(token) {
-        clienteAxios.defaults.headers.common['access-token'] = token;
-    } else {
-        delete clienteAxios.defaults.headers.common['access-token'];
-    }
-}
 
 export default clienteAxios;

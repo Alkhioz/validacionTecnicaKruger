@@ -1,34 +1,43 @@
 import './login.css';
 import IconButton from '../components/iconbutton/IconButton.js';
 import Input from '../components/input/Input.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {login} from '../libs/auth.js';
-import { Navigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
+import useUser from '../hooks/use-user.js';
 
 function Login(){
+    const { user, mutate, loggedOut } = useUser();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (user && !loggedOut) {
+            navigate("/main");
+        }
+    }, [user, loggedOut]);
+    
     const [stateUsuario, setStateUsuario] = useState("");
+    const [stateClave, setStateClave] = useState("");
+    const [stateError, setStateError] = useState("");
+
+    
     const onChangeUsuario = (evt) => {
         evt.preventDefault();
         setStateUsuario(evt.target.value);
     }
-    const [stateClave, setStateClave] = useState("");
+    
     const onChangeClave = (evt) => {
         evt.preventDefault();
         setStateClave(evt.target.value);
     }
-    const [stateError, setStateError] = useState("");
+    
     const handleLogin = async() => {
         let authdata = await login(stateUsuario, stateClave);
         if(authdata.msg === "ok"){
             localStorage.setItem("token", authdata.data.token);
-            setStateError("");
+            mutate("/getCurrentUserData");
         }else{
             setStateError(authdata.data.description);
         }
-    }
-    
-    if(localStorage.getItem("token") !== null){
-        return <Navigate to="/" replace />;
     }
     
     return(

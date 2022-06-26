@@ -38,16 +38,10 @@ const auth = (req, res, next) => {
             req.decoded = decoded.data
             next()
         } else {
-            res.jsonp({
-                msg: 'err',
-                data: {description: 'invalid token'}
-            });
+            res.sendStatus(403);
         }
     }else{
-        res.jsonp({
-            msg: 'err',
-            data: {description: 'invalid token'}
-        });
+        res.sendStatus(403);
     }
 }
 

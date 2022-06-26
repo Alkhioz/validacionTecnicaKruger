@@ -9,6 +9,7 @@ import { useState } from 'react';*/
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './layouts/login.js';
 import Inicio from './layouts/inicio.js';
+import Main from './layouts/main.js';
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Inicio/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/main" element={<Main/>} />
         <Route path="*" element={<p>404</p>} />
       </Routes>
     </Router>
