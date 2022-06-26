@@ -147,6 +147,37 @@ const Profile=(props)=>{
         }
     }, [profile, noData, loading]);
 
+
+    const handleUpdateData=()=>{
+        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === ""){
+            if(stateCedula === "")
+                setStateCedulaError("Debe rellenar este campo")
+            if(stateNombre === "")
+                setStateNombreError("Debe rellenar este campo")
+            if(stateApellido === "")
+                setStateApellidoError("Debe rellenar este campo")
+            if(stateEmail === "")
+                setStateEmailError("Debe rellenar este campo")
+            if(stateFecha === "")
+                setStateFechaError("Debe rellenar este campo")
+            if(stateDireccion === "")
+                setstateDireccionError("Debe rellenar este campo")
+            if(stateTelefono === "")
+                setstateTelefonoError("Debe rellenar este campo")
+            return false;
+        }
+        let data = {
+            dni: stateCedula,
+            name: stateNombre,
+            lastname: stateApellido,
+            email: stateEmail,
+            dateOfBirth: stateFecha,
+            address: stateDireccion,
+            phone: stateTelefono
+        };
+        console.log(data);
+    }
+
     return(
         <div className="profile">
             <div className="profileCard">
@@ -222,7 +253,7 @@ const Profile=(props)=>{
                 <div className="profileAction">
                     <IconButton 
                         id="updateUserInfo"
-                        onClick={(evt)=>{evt.preventDefault();console.log("it works");}}
+                        onClick={handleUpdateData}
                         name="Actualizar Datos"
                         icon="fa fa-pencil"
                         type="IconButton"
