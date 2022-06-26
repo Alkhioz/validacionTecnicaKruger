@@ -12,7 +12,7 @@ function Inicio(){
                     <h2 className="inicioSubtitulo">Inventario de vacunación de empleados</h2>
                 </header>
                 <main className="inicioMain">
-                    <p className="inicioMainText">En su compromiso con mantener la salud de su personal y del público en general, Kurger Corp pone a disposición de sus empleados esta herramienta donde pueden actualizar el estado de su vacunación.</p>                    <div className="inicioAction">
+                    <p className="inicioMainText">En su compromiso por mantener la salud de su personal y del público en general, Kurger Corp pone a disposición de sus empleados esta herramienta donde pueden actualizar el estado de su vacunación.</p>                    <div className="inicioAction">
                         <IconButton 
                             id="adddata"
                             onClick={()=>navigate("/login")}
