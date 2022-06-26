@@ -1,11 +1,11 @@
 import './main.css';
-import {logout} from '../libs/auth.js';
+import {logout} from '../libs/auth';
 import { useNavigate  } from "react-router-dom";
-import useUser from '../data/use-user.js';
+import useUser from '../data/use-user';
 import {useEffect, useState} from 'react';
-import Loading from './loading.js';
-import MainNavigation from '../components/mainnavigation/mainnavigation.js';
-import Profile from '../components/profile/profile.js';
+import Loading from './loading';
+import MainNavigation from '../components/mainnavigation/mainnavigation';
+import Profile from '../components/profile/profile';
 
 function Inicio(){
 

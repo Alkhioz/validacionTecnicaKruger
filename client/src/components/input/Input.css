@@ -1,6 +1,8 @@
 .Input{
     position: relative;
     margin: 45px 0;
+    display: grid;
+    align-items: center;
 }
 
 .Input>input {

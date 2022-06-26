@@ -1,14 +1,39 @@
 import './profile.css';
-import useProfile from '../../data/use-profile.js';
+import useProfile from '../../data/use-profile';
 import { useEffect, useState } from 'react';
 import Input from '../input/Input';
 import IconButton from '../iconbutton/IconButton';
+import Select from '../select/select';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from '../../utilities/utilities';
 import verificarCedula from '../../utilities/validarCedula';
-import clienteAxios from "../../utilities/axios.js";
+import clienteAxios from "../../utilities/axios";
 import Swal from "sweetalert2";
 
 const Profile=(props)=>{
+
+    const vaccines=[
+      {
+        id: 0,
+        body: "Seleccione la vacuna"
+      },
+      {
+        id: 1,
+        body: "Sputnik"
+      },
+      {
+        id: 2,
+        body: "AstraZeneca"
+      },
+      {
+        id: 3,
+        body: "Pfizer"
+      },
+      {
+        id: 4,
+        body: "Jhonson&Jhonson"
+      }
+    ];
+
     const { profile, mutate, noData, loading } = useProfile(props.user.id);
 
     /*Cedula*/
@@ -101,7 +126,7 @@ const Profile=(props)=>{
             }
         }
     }
-    /*Numero telefono*/
+    /*Fecha nacimiento*/
     const [stateFecha, setStateFecha] = useState("");
     const [stateFechaError, setStateFechaError] = useState("");
 
@@ -133,6 +158,22 @@ const Profile=(props)=>{
             setstateDireccionError("");
         }
     }
+    /*Fecha vacunacion*/
+    const [stateFechaVacunacion, setStateFechaVacunacion] = useState("");
+    const [stateFechaVacunacionError, setStateFechaVacunacionError] = useState("");
+
+    const onChangeFechaVacunacion = (evt) => {
+        evt.preventDefault();
+        setStateFechaVacunacion(evt.target.value);
+    }
+
+    const  onBlurFechaVacunacion = () => {
+        if(stateFechaVacunacion === ""){
+            setStateFechaVacunacionError("Seleccione una fecha valida");
+        }else{
+            setStateFechaVacunacionError("");
+        }
+    }
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
     useEffect(() => {
@@ -151,7 +192,7 @@ const Profile=(props)=>{
 
 
     const handleUpdateData=async()=>{
-        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === ""){
+        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || stateFechaVacunacion === ""){
             if(stateCedula === "")
                 setStateCedulaError("Debe rellenar este campo")
             if(stateNombre === "")
@@ -166,6 +207,8 @@ const Profile=(props)=>{
                 setstateDireccionError("Debe rellenar este campo")
             if(stateTelefono === "")
                 setstateTelefonoError("Debe rellenar este campo")
+            if(stateFechaVacunacion === "")
+                setStateFechaVacunacionError("Debe rellenar este campo")
             return false;
         }
         let data = {
@@ -267,6 +310,20 @@ const Profile=(props)=>{
                         onChange={onChangeDireccion}
                         onBlur={onBlurDireccion}
                         error={stateDireccionError}
+                    />
+                    <Input 
+                        type="date"
+                        name="Fecha Vacunación"
+                        id="fechavaccine"
+                        value={stateFechaVacunacion}
+                        onChange={onChangeFechaVacunacion}
+                        onBlur={onBlurFechaVacunacion}
+                        error={stateFechaVacunacionError}
+                    />
+                    <Select 
+                        options={vaccines}
+                        name={"Vacuna"}
+                        id="vacuna"
                     />
                 </div>
                 <div className="profileAction">

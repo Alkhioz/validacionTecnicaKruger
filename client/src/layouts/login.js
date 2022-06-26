@@ -1,11 +1,11 @@
 import './login.css';
-import IconButton from '../components/iconbutton/IconButton.js';
-import Input from '../components/input/Input.js';
+import IconButton from '../components/iconbutton/IconButton';
+import Input from '../components/input/Input';
 import { useState, useEffect } from 'react';
-import {login} from '../libs/auth.js';
+import {login} from '../libs/auth';
 import { useNavigate  } from "react-router-dom";
-import useUser from '../data/use-user.js';
-import Loading from './loading.js';
+import useUser from '../data/use-user';
+import Loading from './loading';
 
 function Login(){
     const { user, mutate, loggedOut, loading } = useUser();

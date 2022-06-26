@@ -1,0 +1,29 @@
+.Select{
+    position: relative;
+    margin: 45px 0;
+    display: grid;
+    align-items: center;
+}
+
+.Select>select {
+    background: none;
+    color: var(--tertiary-color);
+    font-size: 18px;
+    padding: 6px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.Select>label {
+    top: -24px;
+    color: var(--brand-color);
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    transition: 300ms ease all;
+}

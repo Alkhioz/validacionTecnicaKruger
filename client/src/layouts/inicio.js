@@ -1,5 +1,5 @@
 import './inicio.css';
-import IconButton from '../components/iconbutton/IconButton.js';
+import IconButton from '../components/iconbutton/IconButton';
 import { useNavigate  } from "react-router-dom";
 
 function Inicio(){
