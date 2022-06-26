@@ -12,7 +12,7 @@ function Inicio(){
     const [navState, setNavState] = useState(0);
     const [showMobileNavState, setShowMobileNavState] = useState(false);
 
-    const adminMenuItems = [{name:"Dashboard", icon: "fa fa-pie-chart"}, {name:"Usuarios", icon: "fa fa-users"}];
+    const adminMenuItems = [{name:"Dashboard", icon: "fa fa-pie-chart"}, {name:"Usuarios", icon: "fa fa-users"}, {name:"Editar Perfil", icon: "fa fa-cogs"}];
     
     const handleChangeNav = (evt) => {
         evt.preventDefault();

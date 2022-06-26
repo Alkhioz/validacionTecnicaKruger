@@ -1,7 +1,11 @@
 import './sidemenu.css';
 const sideMenu = (props)=>{
+    const changeNavigation=(evt)=>{
+        props.changeNav(evt);
+        props.handleShow(evt);
+    }
     const protectedMenuItems = () => props.menuItems.map((item,i)=>{
-        return <button key={`protected_${i}`} className={props.selected===i?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={props.changeNav} value={i}>{item.name}<i className={item.icon} aria-hidden="true"></i></button>
+        return <button key={`protected_${i}`} className={props.selected===i?"sideMenuItem sideMenuItemSelected":"sideMenuItem"} onClick={changeNavigation} value={i}>{item.name}<i className={item.icon} aria-hidden="true"></i></button>
     });
     return(
         <div className="sideMenuContainer" style={{display: props.show?"block":"none"}}>
