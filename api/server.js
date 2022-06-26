@@ -88,7 +88,8 @@ server.get('/getCurrentUserData', auth, (req, res) => {
     let response = {
         name: `${user.username}`,
         isAdmin: user.roleId === 1 ? true:false,
-        isIncomplete: user.dateOfBirth === "" || user.address === "" || user.phone === ""
+        isIncomplete: user.dateOfBirth === "" || user.address === "" || user.phone === "",
+        id: user.id
     }
     res.jsonp(response)
 })

@@ -5,6 +5,7 @@ import useUser from '../data/use-user.js';
 import {useEffect, useState} from 'react';
 import Loading from './loading.js';
 import MainNavigation from '../components/mainnavigation/mainnavigation.js';
+import Profile from '../components/profile/profile.js';
 
 function Inicio(){
 
@@ -50,6 +51,9 @@ function Inicio(){
                     selected={parseInt(navState)}
                     changeNav={handleChangeNav}
                     menuItems={adminMenuItems}
+                />
+                <Profile
+                    isIncomplete={user.id}
                 />
         </div>
     );
