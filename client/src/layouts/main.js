@@ -1,5 +1,4 @@
 import './main.css';
-import IconButton from '../components/iconbutton/IconButton.js';
 import {logout} from '../libs/auth.js';
 import { useNavigate  } from "react-router-dom";
 import useUser from '../data/use-user.js';
@@ -16,20 +15,22 @@ function Inicio(){
         }
     }, [user, loggedOut]);
 
-    const handleLogout = () => {
+    const handleLogout = (evt) => {
+        evt.preventDefault();
         logout();
         mutate("/getCurrentUserData");
     }
     return(
         loading?<Loading/>:
-        <div className="loginLayout">
-                <IconButton 
-                    id="logout"
-                    onClick={handleLogout}
-                    name="Cerrar sesión"
-                    icon="fa fa-sign-in"
-                    type="IconButton"
-                />
+        <div className="mainLayout">
+                <nav className="mainNav">
+                    <h1 className="mainLogo noSelect">IVK</h1>
+                    <div></div>
+                    <div className="mainUser">
+                        <p><b>Welcome </b>{user.name} <a className="mainLogout" href="/login" onClick={handleLogout}>logout</a></p>
+                    </div>
+                </nav>
+                
         </div>
     );
 }

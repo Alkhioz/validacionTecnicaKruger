@@ -1,0 +1,22 @@
+.mainNav{
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    border-bottom: 2px solid var(--brand-color);
+}
+.mainLogo{
+    color: var(--brand-color);
+    font-size: 2rem;
+    margin: .6rem;
+}
+
+.mainUser{
+    margin: .6rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.mainLogout{
+    color: var(--focus-color);
+    text-decoration: none;
+    display: block;
+}
