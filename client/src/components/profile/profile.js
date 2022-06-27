@@ -236,6 +236,9 @@ const Profile=(props)=>{
             setStateDosisError("");
             setStateFechaVacunacionError("");
             setStateVacunaError("");
+            setStateDosis("");
+            setStateFechaVacunacion("");
+            setStateVacuna(0);
         }
         if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || (parseInt(stateVacunado)===2 && (stateDosis === "" ||stateFechaVacunacion === "" || parseInt(stateVacuna) === 0))){
             if(stateCedula === "")
