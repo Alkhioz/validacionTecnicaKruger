@@ -8,27 +8,56 @@ const Users=()=>{
 
     const[usersState, setUsersState] = useState([]);
 
-    /*const userList=()=>usersState.map((user,i)=>{
-        return <p key={`userlist${i}`}>{user.name}</p>
-    });*/
-
     useEffect(() => {
         if (users && !noDataUsers) {
             setUsersState(users);
         }
     }, [users, noDataUsers]);
 
-    const tableHeader = ["Cédula", "Usuario", "Nombres", "Apellidos", "Correo", "Fecha Nacimiento", "N° Teléfono", "Dirección", "Role", "Estado"];
-    const tableTemplate = ["dni", "username", "name", "lastname", "mail", "birth", "phone", "address", "isAdmin", "needUpdate"];
+    const template = [
+        {
+            name:"Cédula",
+            id:"dni"
+        },{
+            name:"Usuario",
+            id:"username"
+        },{
+            name:"Nombres",
+            id:"name"
+        },{
+            name:"Apellidos",
+            id:"lastname"
+        },{
+            name:"Correo",
+            id:"mail"
+        },{
+            name:"Fecha Nacimiento",
+            id:"birth"
+        },{
+            name:"N° Teléfono",
+            id:"phone"
+        },{
+            name:"Dirección",
+            id:"address"
+        },{
+            name:"Role",
+            id:"isAdmin",
+            render: (val)=> val?"Adminstrador":"Empleado"
+        },{
+            name:"Estado",
+            id:"needUpdate",
+            render: (val)=> val?"Datos Completos":"Datos Incompletos"
+        }
+    ];
+
     return(
         !loadingUsers?
         <div className="users">
             <div className="usersCard">
                 <h1 className="usersTittle">Listado de Usuarios</h1>
                 <Table
-                    header={tableHeader}
-                    template={tableTemplate}
                     data={usersState}
+                    template={template}                
                 />
             </div>
         </div>
