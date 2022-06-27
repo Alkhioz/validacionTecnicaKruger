@@ -1,5 +1,6 @@
 import './profile.css';
 import useProfile from '../../data/use-profile';
+import useVaccine from '../../data/use-vaccine';
 import { useEffect, useState } from 'react';
 import Input from '../input/Input';
 import IconButton from '../iconbutton/IconButton';
@@ -10,31 +11,40 @@ import clienteAxios from "../../utilities/axios";
 import Swal from "sweetalert2";
 
 const Profile=(props)=>{
+    
+    const { profile, noData, loading } = useProfile(props.user.id);
 
-    const vaccines=[
-      {
-        id: 0,
-        body: "Seleccione la vacuna"
-      },
-      {
-        id: 1,
-        body: "Sputnik"
-      },
-      {
-        id: 2,
-        body: "AstraZeneca"
-      },
-      {
-        id: 3,
-        body: "Pfizer"
-      },
-      {
-        id: 4,
-        body: "Jhonson&Jhonson"
-      }
-    ];
+    useEffect(() => {
+        if (profile && !noData) {
+            setStateCedula(profile.dni);
+            setStateNombre(profile.name);
+            setStateApellido(profile.lastname);
+            setStateEmail(profile.email);
+            setStateFecha(profile.dateOfBirth);
+            setstateTelefono(profile.phone);
+            setstateDireccion(profile.address);
+            setStateVacuna(Object.keys(profile.vaccine).length > 0?profile.vaccine.type:0);
+            setStateFechaVacunacion(Object.keys(profile.vaccine).length > 0?profile.vaccine.date:"");
+            setStateVacunado(Object.keys(profile.vaccine).length > 0?2:1);
+            setStateDosis(Object.keys(profile.vaccine).length > 0?profile.vaccine.dose:"");
+            if(profile.dateOfBirth === "" || profile.address === "" || profile.phone === "")
+                setStateMissingData("Debe terminar de llenar sus datos");
+        }
+    }, [profile, noData]);
 
-    const { profile, mutate, noData, loading } = useProfile(props.user.id);
+    const { vaccine, noDataVaccine, loadingVaccine } = useVaccine();
+
+    useEffect(() => {
+        if (vaccine && !noDataVaccine) {
+            setStateVaccines([{
+                id: 0,
+                body: "Seleccione la vacuna"
+              },
+              ...vaccine]);
+        }
+    }, [vaccine, noDataVaccine]);
+
+    const [stateVaccines, setStateVaccines] = useState([]);
 
     /*Cedula*/
     const [stateCedula, setStateCedula] = useState("");
@@ -174,43 +184,95 @@ const Profile=(props)=>{
             setStateFechaVacunacionError("");
         }
     }
+    /*Vaccine*/
+    const [stateVacuna, setStateVacuna] = useState(0);
+    const [stateVacunaError, setStateVacunaError] = useState("");
+    
+    const onChangeVacuna = (evt) => {
+        evt.preventDefault();
+        setStateVacuna(evt.target.value);
+    }
+    const  onBlurVacuna = () => {
+        if(parseInt(stateVacuna) === 0){
+            setStateVacunaError("Debe seleccionar una vacuna");
+        }else{
+            setStateVacunaError("");
+        }
+    }
+    /*Dosis*/
+    const [stateDosis, setStateDosis] = useState("");
+    const [stateDosisError, setStateDosisError] = useState("");
+
+    const onChangeDosis = (evt) => {
+        evt.preventDefault();
+        if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
+            setStateDosis(evt.target.value);
+    }
+    /*isVaccindated*/
+    const [stateVacunado, setStateVacunado] = useState(1);
+    
+    const onChangeVacunado = (evt) => {
+        evt.preventDefault();
+        setStateVacunado(evt.target.value);
+    }
+
+    const onBlurDosis = () => {
+        if(stateDosis === ""){
+            setStateDosisError("Este campo no puede quedar vacío");
+        }else{
+            if(stateDosis<1){
+                setStateDosisError("La dosis debe ser mayor a 0");
+            }else{
+                setStateDosisError("");
+            }
+        }
+    }
+
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
-    useEffect(() => {
-        if (profile && !noData) {
-            setStateCedula(profile.dni);
-            setStateNombre(profile.name);
-            setStateApellido(profile.lastname);
-            setStateEmail(profile.email);
-            setStateFecha(profile.dateOfBirth);
-            setstateTelefono(profile.phone);
-            setstateDireccion(profile.address);
-            if(profile.dateOfBirth === "" || profile.address === "" || profile.phone === "")
-                setStateMissingData("Debe terminar de llenar sus datos");
-        }
-    }, [profile, noData, loading]);
-
-
+    
     const handleUpdateData=async()=>{
-        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || stateFechaVacunacion === ""){
+        if(parseInt(stateVacunado)===1){
+            setStateDosisError("");
+            setStateFechaVacunacionError("");
+            setStateVacunaError("");
+            setStateDosis("");
+            setStateFechaVacunacion("");
+            setStateVacuna(0);
+        }
+        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || (parseInt(stateVacunado)===2 && (stateDosis === "" ||stateFechaVacunacion === "" || parseInt(stateVacuna) === 0))){
             if(stateCedula === "")
-                setStateCedulaError("Debe rellenar este campo")
+                setStateCedulaError("Debe rellenar este campo");
             if(stateNombre === "")
-                setStateNombreError("Debe rellenar este campo")
+                setStateNombreError("Debe rellenar este campo");
             if(stateApellido === "")
-                setStateApellidoError("Debe rellenar este campo")
+                setStateApellidoError("Debe rellenar este campo");
             if(stateEmail === "")
-                setStateEmailError("Debe rellenar este campo")
+                setStateEmailError("Debe rellenar este campo");
             if(stateFecha === "")
-                setStateFechaError("Debe rellenar este campo")
+                setStateFechaError("Debe rellenar este campo");
             if(stateDireccion === "")
-                setstateDireccionError("Debe rellenar este campo")
+                setstateDireccionError("Debe rellenar este campo");
             if(stateTelefono === "")
-                setstateTelefonoError("Debe rellenar este campo")
-            if(stateFechaVacunacion === "")
-                setStateFechaVacunacionError("Debe rellenar este campo")
+                setstateTelefonoError("Debe rellenar este campo");
+            if(parseInt(stateVacunado)===2){
+                if(stateDosis === "")
+                    setStateDosisError("Debe rellenar este campo");
+                if(stateFechaVacunacion === "")
+                    setStateFechaVacunacionError("Debe colocar la fecha de vacunación");
+                if(parseInt(stateVacuna) === 0)
+                    setStateVacunaError("Debe seleccionar una vacuna");
+            }
             return false;
         }
+        if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "" || stateFechaError !== "" || stateDireccionError !== "" || stateTelefonoError !== "" || stateFechaVacunacionError !== "" || stateVacunaError !== ""  || stateDosisError !== "")
+            return false;
+        
+        let vaccine=parseInt(stateVacunado)===1?{}:{
+            type: stateVacuna,
+            date: stateFechaVacunacion,
+            dose: stateDosis
+        };
         let data = {
             dni: stateCedula,
             name: stateNombre,
@@ -218,7 +280,8 @@ const Profile=(props)=>{
             email: stateEmail,
             dateOfBirth: stateFecha,
             address: stateDireccion,
-            phone: stateTelefono
+            phone: stateTelefono,
+            vaccine
         };
         const actualizarDatos = await clienteAxios.patch(`/user/${profile.id}`,data);
         if(actualizarDatos.status === 200){
@@ -241,7 +304,7 @@ const Profile=(props)=>{
     }
 
     return(
-        <div className="profile">
+            (!loadingVaccine&&!loading)?<div className="profile">
             <div className="profileCard">
                 <h1 className="profileTittle">Datos de Usuario</h1>
                 {stateMissingData!==""&&<p className="profileMissingData">{stateMissingData}</p>}
@@ -311,6 +374,22 @@ const Profile=(props)=>{
                         onBlur={onBlurDireccion}
                         error={stateDireccionError}
                     />
+                    <Select 
+                        options={[{id: 1,body: "No"},{id: 2,body: "Si"}]}
+                        name={"¿Está vacunado?"}
+                        id="vacuna"
+                        value={stateVacunado}
+                        onChange={onChangeVacunado}
+                    />
+                    {parseInt(stateVacunado)===2&&<><Input 
+                        type="text"
+                        name="Dosis"
+                        id="dose"
+                        value={stateDosis}
+                        onChange={onChangeDosis}
+                        onBlur={onBlurDosis}
+                        error={stateDosisError}
+                    />
                     <Input 
                         type="date"
                         name="Fecha Vacunación"
@@ -321,10 +400,14 @@ const Profile=(props)=>{
                         error={stateFechaVacunacionError}
                     />
                     <Select 
-                        options={vaccines}
+                        options={stateVaccines}
                         name={"Vacuna"}
                         id="vacuna"
-                    />
+                        value={stateVacuna}
+                        onChange={onChangeVacuna}
+                        error={stateVacunaError}
+                        onBlur={onBlurVacuna}
+                    /></>}
                 </div>
                 <div className="profileAction">
                     <IconButton 
@@ -336,7 +419,7 @@ const Profile=(props)=>{
                     />
                 </div>
             </div>
-        </div>
+        </div>:<></>
     );
 } 
 export default Profile;

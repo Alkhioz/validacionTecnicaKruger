@@ -1,0 +1,23 @@
+.TableContainer{
+    display:block;
+    width: 100%;
+    overflow-x:auto;
+    position: relative;
+}
+.Table{
+    font-size:1rem;
+    text-align:left;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+.TableHead{
+    color: var(--secondary-color);
+    background-color: var(--brand-color);
+}
+tr:nth-child(even){
+    background-color: var(--accent-color);
+}
+th, td {
+    padding: 8px;
+}

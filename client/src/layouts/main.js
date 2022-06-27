@@ -6,12 +6,16 @@ import {useEffect, useState} from 'react';
 import Loading from './loading';
 import MainNavigation from '../components/mainnavigation/mainnavigation';
 import Profile from '../components/profile/profile';
+import Users from '../components/users/users';
+import { useSWRConfig } from 'swr';
 
 function Inicio(){
-
-    const { user, mutate, loggedOut, loading } = useUser();
+    const {user, loggedOut, loading } = useUser();
     const [navState, setNavState] = useState(0);
+    const [isAdminState, setIsAdminState] = useState(false);
     const [showMobileNavState, setShowMobileNavState] = useState(false);
+
+    const { mutate } = useSWRConfig();
 
     const adminMenuItems = [{name:"Dashboard", icon: "fa fa-pie-chart"}, {name:"Usuarios", icon: "fa fa-users"}, {name:"Editar Perfil", icon: "fa fa-cogs"}];
     
@@ -26,6 +30,9 @@ function Inicio(){
         if (loggedOut) {
             navigate("/login");
         }
+        if(user&&!loggedOut)
+            setIsAdminState(user.isAdmin);
+
     }, [user, loggedOut]);
 
     const handleLogout = (evt) => {
@@ -52,9 +59,14 @@ function Inicio(){
                     changeNav={handleChangeNav}
                     menuItems={adminMenuItems}
                 />
-                <Profile
-                    user={user}
-                />
+                {isAdminState?
+                <>
+                    {parseInt(navState)===0&&<p>Dashboard</p>}
+                    {parseInt(navState)===1&&<Users/>}
+                    {parseInt(navState)===2&&<Profile user={user}/>}
+                </>:
+                <Profile user={user} />}
+                
         </div>
     );
 }

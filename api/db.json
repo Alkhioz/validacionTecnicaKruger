@@ -13,8 +13,9 @@
       "phone": "0996949451",
       "roleId": 1,
       "vaccine": {
-        "type": 2,
-        "date": "2021-06-15"
+        "type": "2",
+        "date": "2021-05-01",
+        "dose": "3"
       }
     },
     {
@@ -30,8 +31,9 @@
       "phone": "0986545124",
       "roleId": 2,
       "vaccine": {
-        "type": 3,
-        "date": "2021-06-15"
+        "type": "3",
+        "date": "2021-06-15",
+        "dose": 1
       }
     },
     {
@@ -44,7 +46,6 @@
       "dateOfBirth": "",
       "address": "",
       "phone": "",
-      "pendingValidation": false,
       "roleId": 2,
       "vaccine": {},
       "id": 3

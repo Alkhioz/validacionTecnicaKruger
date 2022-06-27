@@ -1,0 +1,60 @@
+.users{
+    width: 100%;
+    display: block;
+}
+.usersCard{
+    width: calc(100% - 4rem);
+    max-width: 1500px;
+    box-shadow: 0 4px 8px 0 var(--primary-color);
+    padding: 2rem;
+    margin: 20px auto 0 auto;
+}
+.usersTittle{
+    font-size:2rem;
+    color: var(--focus-color);
+}
+.userField{
+    margin: 10px 0 20px 0;
+    padding: 10px;
+}
+.userField>legend{
+    color: var(--focus-color);
+}
+.addUser{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(15%, min(120px, 100%)), 1fr));
+    grid-gap: .1rem;
+}
+
+.addUserActions{
+    max-width: 250px;
+    display: grid;
+    align-items: center;
+}
+
+.addUserActions>button{ 
+    margin: 1rem;
+    width: calc(100% - 1rem);
+}
+
+.TableOptionEditar, .TableOptionEliminar{
+    padding: .2rem;
+    font-size: 1rem;
+    margin: .2rem;
+    border:none;
+    background-color:var(--secondary-color);
+}
+
+.TableOptionEditar > i, .TableOptionEliminar > i{
+    pointer-events: none;
+}
+
+.TableOptionEditar{
+    outline: 1px solid var(--focus-color);
+    color: var(--focus-color);
+}
+
+.TableOptionEliminar{
+    outline: 1px solid var(--brand-color);
+    color: var(--brand-color);
+}

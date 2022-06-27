@@ -96,6 +96,8 @@ server.get('/getCurrentUserData', auth, (req, res) => {
 
 server.get('/getUsers', auth, isAdmin, (req, res) => {
     let users = db.user.map(user =>{
+        let vaccine=db.vaccine.find(vaccine => parseInt(vaccine.id) === parseInt(user.vaccine.type));
+        console.log(vaccine);
         let data = {
             id: user.id,
             name: user.name,
@@ -108,14 +110,11 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
             birth: user.dateOfBirth,
             isAdmin: user.roleId === 1 ? true : false,
             needUpdate: user.dateOfBirth === "" || user.address === "" || user.phone === "",
-            vaccination: Object.keys(user.vaccine).length === 0 ?{status:false}:{status:true, vaccine:user.vaccine}
+            vaccination: Object.keys(user.vaccine).length === 0 ?{status:false}:{status:true, id:user.vaccine.id, name:vaccine.body, date:user.vaccine.date, dose:user.vaccine.dose}
         }
-        return data
+        return data;
     })
-    res.jsonp({
-        msg: 'ok',
-        data: {users}
-    });
+    res.jsonp(users);
 })
 
 
