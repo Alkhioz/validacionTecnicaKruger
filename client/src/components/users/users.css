@@ -18,3 +18,10 @@
     width: 100%;
     margin:15px;
 }
+.userModalAction{
+    margin: auto;
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(25%, min(170px, 100%)), 1fr));
+    grid-gap: .5rem;
+}
