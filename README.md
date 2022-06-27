@@ -53,3 +53,6 @@ const validarCedula = (cedula) => {
     };
 }
 ```  
+Para realizar esa función tomé el algoritmo de las siguientes fuentes:  
+[Estructura del Número de Cédula de Identidad](https://www.jybaro.com/blog/cedula-de-identidad-ecuatoriana/)  
+[Cómo validar cédula y RUC en Ecuador](https://medium.com/@bryansuarez/c%C3%B3mo-validar-c%C3%A9dula-y-ruc-en-ecuador-b62c5666186f#:~:text=El%20proceso%20para%20la%20validaci%C3%B3n,3%2C4%2C5).)
