@@ -30,6 +30,7 @@
     max-width: 250px;
     display: grid;
     align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(max(15%, min(120px, 100%)), 1fr));
 }
 
 .addUserActions>button{ 
