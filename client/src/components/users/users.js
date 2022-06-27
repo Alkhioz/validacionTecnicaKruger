@@ -97,7 +97,7 @@ const Users=()=>{
             id:"vaccination",
             render: (val)=> val.status?<>
                 <p style={{color:"green"}}>Vacunado</p>
-                <small>({val.name} {val.date})</small>
+                <small>{val.name} ({val.dose}) {val.date}</small>
             </>:<p style={{color:"orange"}}>Sin Vacunar</p>
         }
     ];

@@ -110,7 +110,7 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
             birth: user.dateOfBirth,
             isAdmin: user.roleId === 1 ? true : false,
             needUpdate: user.dateOfBirth === "" || user.address === "" || user.phone === "",
-            vaccination: Object.keys(user.vaccine).length === 0 ?{status:false}:{status:true, id:user.vaccine.id, name:vaccine.body, date:user.vaccine.date}
+            vaccination: Object.keys(user.vaccine).length === 0 ?{status:false}:{status:true, id:user.vaccine.id, name:vaccine.body, date:user.vaccine.date, dose:user.vaccine.dose}
         }
         return data;
     })
