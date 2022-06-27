@@ -19,9 +19,7 @@ Dirigirse a la carpeta api y ejecutar:
 Hacer los mismo en la carpeta client:  
 `npm start`  
 ### Pruebas
-Dirigirse a la carpeta api y ejecutar:  
-`npm test`  
-Hacer los mismo en la carpeta client:  
+Dirigirse a la carpeta client y ejecutar:  
 `npm tets`  
 ### Validaciones
 Para validar que el número de cédula sea valido, se usa la siguiente función:  
