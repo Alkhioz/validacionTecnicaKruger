@@ -24,7 +24,9 @@ Dirigirse a la carpeta api y ejecutar:
 Hacer los mismo en la carpeta client:  
 `npm tets`  
 ### Validaciones
-`const validarCedula = (cedula) => {
+Para validar que el número de cédula sea valido, se usa la siguiente función:  
+```javascript
+const validarCedula = (cedula) => {
     if(cedula.length!==10)
         return {
             status: false,
@@ -49,4 +51,5 @@ Hacer los mismo en la carpeta client:
     return {
         status: true
     };
-}`  
+}
+```  
