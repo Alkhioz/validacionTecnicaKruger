@@ -97,7 +97,6 @@ server.get('/getCurrentUserData', auth, (req, res) => {
 server.get('/getUsers', auth, isAdmin, (req, res) => {
     let users = db.user.map(user =>{
         let vaccine=db.vaccine.find(vaccine => parseInt(vaccine.id) === parseInt(user.vaccine.type));
-        console.log(vaccine);
         let data = {
             id: user.id,
             name: user.name,
