@@ -1,9 +1,11 @@
 import './users.css';
 import UseUsers from '../../data/use-users';
+import useVaccine from '../../data/use-vaccine';
 import { useState, useEffect } from 'react';
 import Table from '../table/table';
 import IconButton from '../iconbutton/IconButton';
 import Input from '../input/Input';
+import Select from '../select/select';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from '../../utilities/utilities';
 import verificarCedula from '../../utilities/validarCedula';
 import generatePassword from '../../utilities/generatePassword';
@@ -13,6 +15,15 @@ import { useSWRConfig } from 'swr';
 
 const Users=()=>{
     const { users, loadingUsers } = UseUsers();
+
+    const [listaUsuariosState, setListaUsuariosState] = useState([]);
+    const { vaccine } = useVaccine();
+
+    useEffect(() => {
+        if(!loadingUsers){
+            setListaUsuariosState(users);
+        }
+    }, [users, loadingUsers]);
 
     const { mutate } = useSWRConfig();
 
@@ -318,6 +329,40 @@ const Users=()=>{
             }
         }
     }
+
+    const [stateVacunadoFiltro, setStateVacunadoFiltro]= useState(0);
+    const onChangeVacunadoFlitro=(evt)=>{
+        evt.preventDefault();
+        setStateVacunadoFiltro(evt.target.value);
+        if(evt.target.value<2){
+            setStateVacuna(0);
+            setstateFechaInicio("");
+            setstateFechaFin("");
+        }
+    }
+
+    const [stateVacuna, setStateVacuna]= useState(0);
+    const onChangeVacuna=(evt)=>{
+        evt.preventDefault();
+        setStateVacuna(evt.target.value);
+    }
+        
+    const [stateFechaInicio, setstateFechaInicio] = useState("");
+    const onChangeFechaInicio = (evt) => {
+        evt.preventDefault();
+        setstateFechaInicio(evt.target.value);
+    }
+        
+    const [stateFechaFin, setstateFechaFin] = useState("");
+    const onChangeFechaFin = (evt) => {
+        evt.preventDefault();
+        setstateFechaFin(evt.target.value);
+    }
+
+    const handleFiltro=()=>{
+
+    }
+
     return(
         !loadingUsers?
         <div className="users">
@@ -382,8 +427,53 @@ const Users=()=>{
                         </div> 
                     </div>
                 </fieldset>
+                <fieldset className="userField">
+                    <legend>Filtrar</legend>
+                    <div className="addUser">
+                        <Select
+                            options={[{id: 0,body: "Seleccione"},{id: 1,body: "No"},{id: 2,body: "Si"}]}
+                            name={"¿Está vacunado?"}
+                            id="vacuna"
+                            value={stateVacunadoFiltro}
+                            onChange={onChangeVacunadoFlitro}
+                        />
+                        <Select
+                            options={[{id: 0,body: "Seleccione"},...vaccine]}
+                            name={"Tipo de vacuna"}
+                            id="vacuna"
+                            value={stateVacuna}
+                            onChange={onChangeVacuna}
+                            style={{display: stateVacunadoFiltro>1?"block":"none"}}
+                        />
+                         <Input
+                            type="date"
+                            name="Fecha Inicio"
+                            id="fechavaccine"
+                            value={stateFechaInicio}
+                            onChange={onChangeFechaInicio}
+                            style={{display: stateVacunadoFiltro>1?"block":"none"}}
+                        />
+                        <Input
+                            type="date"
+                            name="Fecha Fin"
+                            id="fechavaccinefin"
+                            value={stateFechaFin}
+                            onChange={onChangeFechaFin}
+                            style={{display: stateVacunadoFiltro>1?"block":"none"}}
+                        />
+                        <div className="addUserActions">
+                            <IconButton
+                                id="filtrar"
+                                onClick={handleFiltro}
+                                name="Filtrar"
+                                icon="fa fa-search"
+                                type="IconButton"
+                            />
+                        </div>
+                    </div>
+                </fieldset>
                 <Table
-                    data={users}
+                    data={listaUsuariosState}
                     template={template}                
                 />
             </div>

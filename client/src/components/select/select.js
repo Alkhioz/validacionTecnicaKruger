@@ -5,7 +5,7 @@ const Select =(props)=>{
         return <option key={`vaccine${id}`} value={vaccine.id} disabled={vaccine.id===0?true:false} >{vaccine.body}</option>
     });
     return(
-        <div>
+        <div style={props.style}>
         <div className="Select">
             <select id={props.id} onBlur={props.onBlur} onChange={props.onChange} value={props.value}>
                 {options()}
