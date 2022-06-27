@@ -57,7 +57,7 @@ Para realizar esa función tomé el algoritmo de las siguientes fuentes:
 [Estructura del Número de Cédula de Identidad](https://www.jybaro.com/blog/cedula-de-identidad-ecuatoriana/)  
 [Cómo validar cédula y RUC en Ecuador](https://medium.com/@bryansuarez/c%C3%B3mo-validar-c%C3%A9dula-y-ruc-en-ecuador-b62c5666186f#:~:text=El%20proceso%20para%20la%20validaci%C3%B3n,3%2C4%2C5)  
 ### Autentificación
-Para el proceso de autentificación use JWT y para facilitar el uso del token lo agregué al axios con un interceptor.  
+Para el proceso de autentificación se usó JWT y para facilitar el uso del token lo agregua al axios con un interceptor.  
 ```javascript
 const clienteAxios = axios.create({
     baseURL : 'http://localhost:8080/',
