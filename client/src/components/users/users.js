@@ -17,13 +17,20 @@ const Users=()=>{
     const { users, loadingUsers } = UseUsers();
 
     const [listaUsuariosState, setListaUsuariosState] = useState([]);
-    const { vaccine } = useVaccine();
+    const [listaVaccineState, setlistaVaccineState] = useState([]);
+    const { vaccine, loadingVaccine } = useVaccine();
 
     useEffect(() => {
         if(!loadingUsers){
             setListaUsuariosState(users);
         }
     }, [users, loadingUsers]);
+
+    useEffect(() => {
+        if(!loadingVaccine){
+            setlistaVaccineState(vaccine);
+        }
+    }, [vaccine, loadingVaccine]);
 
     const { mutate } = useSWRConfig();
 
@@ -360,7 +367,28 @@ const Users=()=>{
     }
 
     const handleFiltro=()=>{
-
+        if(parseInt(stateVacunadoFiltro)===0){
+            return false;
+        }else if(parseInt(stateVacunadoFiltro)===1){
+            setListaUsuariosState([...users.filter(user=>!user.vaccination.status)]);
+        }else if(parseInt(stateVacunadoFiltro)===2){
+            let lista=[...users.filter(user=>user.vaccination.status)];
+            if(stateVacuna>0)
+                lista=lista.filter(user=>parseInt(user.vaccination.id)===parseInt(stateVacuna));
+            if(stateFechaInicio!=="")
+                lista=lista.filter(user=>user.vaccination.date>=stateFechaInicio);
+            if(stateFechaFin!=="")
+                lista=lista.filter(user=>user.vaccination.date<=stateFechaFin);
+            setListaUsuariosState([...lista]);
+        } 
+        
+    }
+    const handleCancelarFiltro=()=>{
+        setStateVacunadoFiltro(0);
+        setStateVacuna(0);
+        setstateFechaInicio("");
+        setstateFechaFin("");
+        setListaUsuariosState([...users]);
     }
 
     return(
@@ -438,7 +466,7 @@ const Users=()=>{
                             onChange={onChangeVacunadoFlitro}
                         />
                         <Select
-                            options={[{id: 0,body: "Seleccione"},...vaccine]}
+                            options={[{id: 0,body: "Seleccione"},...listaVaccineState]}
                             name={"Tipo de vacuna"}
                             id="vacuna"
                             value={stateVacuna}
@@ -468,6 +496,13 @@ const Users=()=>{
                                 name="Filtrar"
                                 icon="fa fa-search"
                                 type="IconButton"
+                            />
+                            <IconButton
+                                id="cancelar"
+                                onClick={handleCancelarFiltro}
+                                name="Cancelar"
+                                icon="fa fa-times-circle"
+                                type="IconButtonAlter"
                             />
                         </div>
                     </div>
