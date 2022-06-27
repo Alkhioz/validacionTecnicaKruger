@@ -25,6 +25,8 @@ const Profile=(props)=>{
             setstateDireccion(profile.address);
             setStateVacuna(Object.keys(profile.vaccine).length > 0?profile.vaccine.type:0);
             setStateFechaVacunacion(Object.keys(profile.vaccine).length > 0?profile.vaccine.date:"");
+            setStateVacunado(Object.keys(profile.vaccine).length > 0?2:1);
+            setStateDosis(Object.keys(profile.vaccine).length > 0?profile.vaccine.dose:"");
             if(profile.dateOfBirth === "" || profile.address === "" || profile.phone === "")
                 setStateMissingData("Debe terminar de llenar sus datos");
         }
@@ -197,11 +199,45 @@ const Profile=(props)=>{
             setStateVacunaError("");
         }
     }
+    /*Dosis*/
+    const [stateDosis, setStateDosis] = useState("");
+    const [stateDosisError, setStateDosisError] = useState("");
+
+    const onChangeDosis = (evt) => {
+        evt.preventDefault();
+        if (isNumeric(evt.target.value) && isNotDot(evt.target.value))
+            setStateDosis(evt.target.value);
+    }
+    /*isVaccindated*/
+    const [stateVacunado, setStateVacunado] = useState(1);
+    
+    const onChangeVacunado = (evt) => {
+        evt.preventDefault();
+        setStateVacunado(evt.target.value);
+    }
+
+    const onBlurDosis = () => {
+        if(stateDosis === ""){
+            setStateDosisError("Este campo no puede quedar vacío");
+        }else{
+            if(stateDosis<1){
+                setStateDosisError("La dosis debe ser mayor a 0");
+            }else{
+                setStateDosisError("");
+            }
+        }
+    }
+
     /*MissingData*/
     const [stateMissingData, setStateMissingData] = useState("");
     
     const handleUpdateData=async()=>{
-        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || stateFechaVacunacion === ""){
+        if(parseInt(stateVacunado)===1){
+            setStateDosisError("");
+            setStateFechaVacunacionError("");
+            setStateVacunaError("");
+        }
+        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || (parseInt(stateVacunado)===2 && (stateDosis === "" ||stateFechaVacunacion === "" || parseInt(stateVacuna) === 0))){
             if(stateCedula === "")
                 setStateCedulaError("Debe rellenar este campo");
             if(stateNombre === "")
@@ -216,14 +252,24 @@ const Profile=(props)=>{
                 setstateDireccionError("Debe rellenar este campo");
             if(stateTelefono === "")
                 setstateTelefonoError("Debe rellenar este campo");
-            if(stateFechaVacunacion === "")
-                setStateFechaVacunacionError("Debe colocar la fecha de vacunación");
-            if(parseInt(stateVacuna) === 0)
-                setStateVacunaError("Debe seleccionar una vacuna");
+            if(parseInt(stateVacunado)===2){
+                if(stateDosis === "")
+                    setStateDosisError("Debe rellenar este campo");
+                if(stateFechaVacunacion === "")
+                    setStateFechaVacunacionError("Debe colocar la fecha de vacunación");
+                if(parseInt(stateVacuna) === 0)
+                    setStateVacunaError("Debe seleccionar una vacuna");
+            }
             return false;
         }
-        if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "" || stateFechaError !== "" || stateDireccionError !== "" || stateTelefonoError !== "" || stateFechaVacunacionError !== "")
+        if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "" || stateFechaError !== "" || stateDireccionError !== "" || stateTelefonoError !== "" || stateFechaVacunacionError !== "" || stateVacunaError !== ""  || stateDosisError !== "")
             return false;
+        
+        let vaccine=parseInt(stateVacunado)===1?{}:{
+            type: stateVacuna,
+            date: stateFechaVacunacion,
+            dose: stateDosis
+        };
         let data = {
             dni: stateCedula,
             name: stateNombre,
@@ -232,10 +278,7 @@ const Profile=(props)=>{
             dateOfBirth: stateFecha,
             address: stateDireccion,
             phone: stateTelefono,
-            vaccine: {
-              type: stateVacuna,
-              date: stateFechaVacunacion
-            }
+            vaccine
         };
         const actualizarDatos = await clienteAxios.patch(`/user/${profile.id}`,data);
         if(actualizarDatos.status === 200){
@@ -328,6 +371,22 @@ const Profile=(props)=>{
                         onBlur={onBlurDireccion}
                         error={stateDireccionError}
                     />
+                    <Select 
+                        options={[{id: 1,body: "No"},{id: 2,body: "Si"}]}
+                        name={"¿Está vacunado?"}
+                        id="vacuna"
+                        value={stateVacunado}
+                        onChange={onChangeVacunado}
+                    />
+                    {parseInt(stateVacunado)===2&&<><Input 
+                        type="text"
+                        name="Dosis"
+                        id="dose"
+                        value={stateDosis}
+                        onChange={onChangeDosis}
+                        onBlur={onBlurDosis}
+                        error={stateDosisError}
+                    />
                     <Input 
                         type="date"
                         name="Fecha Vacunación"
@@ -345,7 +404,7 @@ const Profile=(props)=>{
                         onChange={onChangeVacuna}
                         error={stateVacunaError}
                         onBlur={onBlurVacuna}
-                    />
+                    /></>}
                 </div>
                 <div className="profileAction">
                     <IconButton 
