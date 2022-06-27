@@ -297,6 +297,7 @@ const Users=()=>{
             };
             const response = await clienteAxios.post('/user', datos);
             if(response.status===201){
+                setStateClave(`USUARIO: ${response.data.username} CLAVE: ${password}`);
                 mutate("/getUsers", [...users,{
                         "id": response.data.id,
                         "name": response.data.name,
@@ -390,6 +391,8 @@ const Users=()=>{
         setstateFechaFin("");
         setListaUsuariosState([...users]);
     }
+
+    const [stateClave, setStateClave]=useState("");
 
     return(
         !loadingUsers?
@@ -507,6 +510,7 @@ const Users=()=>{
                         </div>
                     </div>
                 </fieldset>
+                {stateClave!==""&&<p className="credenciales">{stateClave}</p>}
                 <Table
                     data={listaUsuariosState}
                     template={template}                

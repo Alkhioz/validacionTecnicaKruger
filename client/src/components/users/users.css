@@ -59,3 +59,7 @@
     outline: 1px solid var(--brand-color);
     color: var(--brand-color);
 }
+.credenciales{
+    display:block;
+    margin: 20px 0 20px 0;
+}
