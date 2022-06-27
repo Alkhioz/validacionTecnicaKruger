@@ -216,11 +216,15 @@ const Users=()=>{
         if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "")
             return false;
         if(stateId>0){
+            let username=stateNombre.split(' ')[0];
+            username=username.substring(0, username.length<3?username.length:3) + stateApellido.split(' ')[0] + stateCedula.substring(6,10);
+            username=username.toLowerCase();
             let datos={
                 "dni": stateCedula,
                 "name": stateNombre,
                 "lastname": stateApellido,
                 "email": stateEmail,
+                "username": username,
             };
             const response = await clienteAxios.patch(`/user/${stateId}/`, datos);
             if(response.status===200){
@@ -230,6 +234,7 @@ const Users=()=>{
                         user.lastname=stateApellido;
                         user.mail=stateEmail;
                         user.dni=stateCedula;
+                        user.username=username;
                     }
                     return user;
                 })], false);

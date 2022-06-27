@@ -17,7 +17,7 @@ function Inicio(){
 
     const { mutate } = useSWRConfig();
 
-    const adminMenuItems = [{name:"Dashboard", icon: "fa fa-pie-chart"}, {name:"Usuarios", icon: "fa fa-users"}, {name:"Editar Perfil", icon: "fa fa-cogs"}];
+    const adminMenuItems = [{name:"Usuarios", icon: "fa fa-users"}, {name:"Editar Perfil", icon: "fa fa-cogs"}];
     
     const handleChangeNav = (evt) => {
         evt.preventDefault();
@@ -61,9 +61,8 @@ function Inicio(){
                 />
                 {isAdminState?
                 <>
-                    {parseInt(navState)===0&&<p>Dashboard</p>}
-                    {parseInt(navState)===1&&<Users/>}
-                    {parseInt(navState)===2&&<Profile user={user}/>}
+                    {parseInt(navState)===0&&<Users/>}
+                    {parseInt(navState)===1&&<Profile user={user}/>}
                 </>:
                 <Profile user={user} />}
                 
