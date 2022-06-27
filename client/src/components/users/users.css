@@ -13,15 +13,26 @@
     font-size:2rem;
     color: var(--focus-color);
 }
-.usersAction{
-    max-width: 120px;
-    width: 100%;
-    margin:15px;
+.userField{
+    margin: 10px 0 20px 0;
+    padding: 10px;
 }
-.userModalAction{
-    margin: auto;
-    max-width: 600px;
+.userField>legend{
+    color: var(--focus-color);
+}
+.addUser{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(max(25%, min(170px, 100%)), 1fr));
-    grid-gap: .5rem;
+    grid-template-columns: repeat(auto-fit, minmax(max(15%, min(120px, 100%)), 1fr));
+    grid-gap: .1rem;
+}
+
+.addUserActions{
+    max-width: 250px;
+    display: grid;
+    align-items: center;
+}
+
+.addUserActions>button{ 
+    margin: 1rem;
+    width: calc(100% - 1rem);
 }
