@@ -114,10 +114,7 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
         }
         return data;
     })
-    res.jsonp({
-        msg: 'ok',
-        data: {users}
-    });
+    res.jsonp(users);
 })
 
 
