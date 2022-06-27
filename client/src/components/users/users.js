@@ -2,6 +2,7 @@ import './users.css';
 import UseUsers from '../../data/use-users';
 import { useEffect, useState } from 'react';
 import Table from '../table/table';
+import IconButton from '../iconbutton/IconButton';
 
 const Users=()=>{
     const { users, noDataUsers, loadingUsers, mutateUsers } = UseUsers();
@@ -55,6 +56,15 @@ const Users=()=>{
         <div className="users">
             <div className="usersCard">
                 <h1 className="usersTittle">Listado de Usuarios</h1>
+                <div className="usersAction">
+                    <IconButton
+                        id="adduser"
+                        onClick={()=>{}}
+                        name="Agregar"
+                        icon="fa fa-plus"
+                        type="IconButtonAlter"
+                    />
+                </div>
                 <Table
                     data={usersState}
                     template={template}                
