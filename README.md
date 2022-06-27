@@ -10,16 +10,16 @@ Para poder acceder al sistema se cuanta con los siguientes usuarios:
 
 ### Instalación
 Dirigirse a la carpeta api y ejecutar:
-`npm intall`
+`npm intall`  
 Luego de que se instale hacer los mismo en la carpeta client:
-`npm install`
+`npm install`  
 ### Ejecución
 Dirigirse a la carpeta api y ejecutar:
-`npm start`
+`npm start`  
 Hacer los mismo en la carpeta client:
-`npm start`
+`npm start`  
 ### Pruebas
 Dirigirse a la carpeta api y ejecutar:
-`npm test`
+`npm test`  
 Hacer los mismo en la carpeta client:
-`npm tets`
+`npm tets`  
