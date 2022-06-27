@@ -1,6 +1,6 @@
 import './users.css';
 import UseUsers from '../../data/use-users';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Table from '../table/table';
 import IconButton from '../iconbutton/IconButton';
 import Input from '../input/Input';
@@ -12,19 +12,54 @@ import Swal from "sweetalert2";
 import { useSWRConfig } from 'swr';
 
 const Users=()=>{
-    const { users, noDataUsers, loadingUsers } = UseUsers();
+    const { users, loadingUsers } = UseUsers();
 
     const { mutate } = useSWRConfig();
-    
-    const[usersState, setUsersState] = useState([]);
 
-    useEffect(() => {
-        if (users && !noDataUsers) {
-            setUsersState(users);
-        }
-    }, [users, noDataUsers, loadingUsers]);
+    const handleEliminarUsuario=(evt)=>{
+        evt.preventDefault();
+        Swal.fire({
+            title: '¿Quiere eliminar a este usuario?',
+            showDenyButton: true,
+            confirmButtonText: 'Eliminar',
+            denyButtonText: `Cancelar`,
+        }).then(async(result) => {
+            if (result.isConfirmed) {
+               const response= await clienteAxios.delete(`/user/${evt.target.value}`);
+               if(response.status===200){
+                Swal.fire({
+                    title: 'Información registrada',
+                    text: 'Se eliminó el usuario',
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+
+                mutate("/getUsers", users.filter(user=>parseInt(user.id)!==parseInt(evt.target.value)), false);
+            }else{
+                Swal.fire({
+                    title: 'No se pudo registrar los datos',
+                    text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                    icon: 'info',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            }
+            }
+        })
+    }
 
     const template = [
+        {
+            name:"",
+            id:"id",
+            render: (val)=> {
+                return <div className="TableOptions">
+                    <button value={val} className="TableOptionEditar"><i className="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button value={val} className="TableOptionEliminar" onClick={handleEliminarUsuario}><i className="fa fa-times-circle" aria-hidden="true"></i></button>
+                </div>;
+            },
+        },
         {
             name:"Cédula",
             id:"dni"
@@ -56,7 +91,14 @@ const Users=()=>{
         },{
             name:"Estado",
             id:"needUpdate",
-            render: (val)=> val?"Datos Completos":"Datos Incompletos"
+            render: (val)=> !val?"Datos Completos":"Datos Incompletos"
+        },{
+            name:"Vacuna",
+            id:"vaccination",
+            render: (val)=> val.status?<>
+                <p style={{color:"green"}}>Vacunado</p>
+                <small>({val.name} {val.date})</small>
+            </>:<p style={{color:"orange"}}>Sin Vacunar</p>
         }
     ];
 
@@ -143,6 +185,8 @@ const Users=()=>{
                 setStateEmailError("Debe rellenar este campo");
             return false;
         }
+        if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "")
+            return false;
         let username=stateNombre.split(' ')[0];
         username=username.substring(0, username.length<3?username.length:3) + stateApellido.split(' ')[0] + stateCedula.substring(6,10);
         username=username.toLowerCase();
@@ -160,8 +204,24 @@ const Users=()=>{
             "roleId": 2,
             "vaccine": {}
         };
-        const response = await clienteAxios.post('/user', datos)
+        const response = await clienteAxios.post('/user', datos);
         if(response.status===201){
+            mutate("/getUsers", [...users,{
+                    "id": response.data.id,
+                    "name": response.data.name,
+                    "lastname": response.data.lastname,
+                    "dni": response.data.dni,
+                    "mail": response.data.email,
+                    "username": response.data.username,
+                    "address": "",
+                    "phone": "",
+                    "birth": "",
+                    "isAdmin": false,
+                    "needUpdate": true,
+                    "vaccination": {
+                        "status": false
+                    }
+                 }], false);
             Swal.fire({
                 title: 'Información registrada',
                 text: 'Se creó el nuevo usuario',
@@ -169,7 +229,6 @@ const Users=()=>{
                 timer: 3000,
                 showConfirmButton: false
             });
-            mutate('/getUsers');
         }else{
             Swal.fire({
                 title: 'No se pudo registrar los datos',
@@ -237,7 +296,7 @@ const Users=()=>{
                     </div>
                 </fieldset>
                 <Table
-                    data={usersState}
+                    data={users}
                     template={template}                
                 />
             </div>

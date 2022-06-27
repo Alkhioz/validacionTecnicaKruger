@@ -222,6 +222,8 @@ const Profile=(props)=>{
                 setStateVacunaError("Debe seleccionar una vacuna");
             return false;
         }
+        if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "" || stateFechaError !== "" || stateDireccionError !== "" || stateTelefonoError !== "" || stateFechaVacunacionError !== "")
+            return false;
         let data = {
             dni: stateCedula,
             name: stateNombre,

@@ -12,7 +12,6 @@ function useProfile(userId) {
     loading,
     noData,
     profile: data,
-    mutateProfile: mutate
   };
 }
 

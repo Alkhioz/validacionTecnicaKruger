@@ -4,7 +4,7 @@
 }
 .usersCard{
     width: calc(100% - 4rem);
-    max-width: 1200px;
+    max-width: 1500px;
     box-shadow: 0 4px 8px 0 var(--primary-color);
     padding: 2rem;
     margin: 20px auto 0 auto;
@@ -35,4 +35,26 @@
 .addUserActions>button{ 
     margin: 1rem;
     width: calc(100% - 1rem);
+}
+
+.TableOptionEditar, .TableOptionEliminar{
+    padding: .2rem;
+    font-size: 1rem;
+    margin: .2rem;
+    border:none;
+    background-color:var(--secondary-color);
+}
+
+.TableOptionEditar > i, .TableOptionEliminar > i{
+    pointer-events: none;
+}
+
+.TableOptionEditar{
+    outline: 1px solid var(--focus-color);
+    color: var(--focus-color);
+}
+
+.TableOptionEliminar{
+    outline: 1px solid var(--brand-color);
+    color: var(--brand-color);
 }

@@ -48,34 +48,6 @@
       "roleId": 2,
       "vaccine": {},
       "id": 3
-    },
-    {
-      "dni": "1316332350",
-      "name": "Rosa Angelica",
-      "lastname": "Mendoza",
-      "username": "rosmendoza2350",
-      "password": "wzI4sM0sl!$%o",
-      "email": "ange@correo.com",
-      "dateOfBirth": "",
-      "address": "",
-      "phone": "",
-      "roleId": 2,
-      "vaccine": {},
-      "id": 4
-    },
-    {
-      "dni": "1316332368",
-      "name": "Alejandro",
-      "lastname": "M",
-      "username": "alem2368",
-      "password": "97Dk(K&7*M)AB",
-      "email": "correo12@gmail.com",
-      "dateOfBirth": "",
-      "address": "",
-      "phone": "",
-      "roleId": 2,
-      "vaccine": {},
-      "id": 5
     }
   ],
   "role": [

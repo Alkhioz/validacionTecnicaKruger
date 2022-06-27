@@ -4,15 +4,14 @@ import clienteAxios from "../utilities/axios.js";
 function useUsers() {
   const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
 
-  const { data, mutate, error } = useSWR(`/getUsers`, fetcher);
+  const { data, mutate, error } = useSWR("/getUsers", fetcher);
   const loadingUsers = !data && !error;
-  const noData = error && error.response.status === 403;
+  const noDataUsers = error && error.response.status === 403;
   
   return {
     loadingUsers,
-    noDataUsers:noData,
+    noDataUsers,
     users: data,
-    mutateUsers: mutate
   };
 }
 

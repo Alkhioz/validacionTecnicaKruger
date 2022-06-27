@@ -2,6 +2,7 @@
     display:block;
     width: 100%;
     overflow-x:auto;
+    position: relative;
 }
 .Table{
     font-size:1rem;

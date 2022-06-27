@@ -12,7 +12,6 @@ function useVaccine() {
     loadingVaccine: loading,
     noDataVaccine: noData,
     vaccine: data,
-    mutateVaccine: mutate
   };
 }
 

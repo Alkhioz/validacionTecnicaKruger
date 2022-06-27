@@ -4,7 +4,7 @@ import clienteAxios from "../utilities/axios.js";
 function useUser() {
   const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
 
-  const { data, mutate, error } = useSWR("/getCurrentUserData", fetcher);
+  const { data, error } = useSWR("/getCurrentUserData", fetcher);
   const loading = !data && !error;
   const loggedOut = error && error.response.status === 403;
   
@@ -12,7 +12,6 @@ function useUser() {
     loading,
     loggedOut,
     user: data,
-    mutateUser: mutate
   };
 }
 
