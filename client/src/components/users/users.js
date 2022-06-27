@@ -49,13 +49,39 @@ const Users=()=>{
         })
     }
 
+    const handleActualizarUsuario=(evt)=>{
+        evt.preventDefault();
+        setStateId(evt.target.value);
+        let usuario=users.find(user=>parseInt(user.id)===parseInt(evt.target.value));
+        setStateCedula(usuario.dni);
+        setStateNombre(usuario.name);
+        setStateApellido(usuario.lastname);
+        setStateEmail(usuario.mail);
+        setStateCedulaError("");
+        setStateNombreError("");
+        setStateApellidoError("");
+        setStateEmailError("");
+    }
+
+    const handleCancelar= () =>{
+        setStateId(0);
+        setStateCedula("");
+        setStateNombre("");
+        setStateApellido("");
+        setStateEmail("");
+        setStateCedulaError("");
+        setStateNombreError("");
+        setStateApellidoError("");
+        setStateEmailError("");
+    }
+
     const template = [
         {
             name:"",
             id:"id",
             render: (val)=> {
                 return <div className="TableOptions">
-                    <button value={val} className="TableOptionEditar"><i className="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button value={val} className="TableOptionEditar" onClick={handleActualizarUsuario}><i className="fa fa-pencil" aria-hidden="true"></i></button>
                     <button value={val} className="TableOptionEliminar" onClick={handleEliminarUsuario}><i className="fa fa-times-circle" aria-hidden="true"></i></button>
                 </div>;
             },
@@ -172,6 +198,8 @@ const Users=()=>{
             setStateEmailError("");
         }
     }
+    /*ID*/
+    const [stateId, setStateId]=useState(0);
 
     const handleUser=async()=>{
         if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === ""){
@@ -187,56 +215,102 @@ const Users=()=>{
         }
         if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "")
             return false;
-        let username=stateNombre.split(' ')[0];
-        username=username.substring(0, username.length<3?username.length:3) + stateApellido.split(' ')[0] + stateCedula.substring(6,10);
-        username=username.toLowerCase();
-        let password = generatePassword(12);
-        let datos={
-            "dni": stateCedula,
-            "name": stateNombre,
-            "lastname": stateApellido,
-            "username": username,
-            "password": password,
-            "email": stateEmail,
-            "dateOfBirth": "",
-            "address": "",
-            "phone": "",
-            "roleId": 2,
-            "vaccine": {}
-        };
-        const response = await clienteAxios.post('/user', datos);
-        if(response.status===201){
-            mutate("/getUsers", [...users,{
-                    "id": response.data.id,
-                    "name": response.data.name,
-                    "lastname": response.data.lastname,
-                    "dni": response.data.dni,
-                    "mail": response.data.email,
-                    "username": response.data.username,
-                    "address": "",
-                    "phone": "",
-                    "birth": "",
-                    "isAdmin": false,
-                    "needUpdate": true,
-                    "vaccination": {
-                        "status": false
+        if(stateId>0){
+            let datos={
+                "dni": stateCedula,
+                "name": stateNombre,
+                "lastname": stateApellido,
+                "email": stateEmail,
+            };
+            const response = await clienteAxios.patch(`/user/${stateId}/`, datos);
+            if(response.status===200){
+                mutate("/getUsers", [...users.map(user=>{
+                    if(parseInt(stateId)===user.id){
+                        user.name=stateNombre;
+                        user.lastname=stateApellido;
+                        user.mail=stateEmail;
+                        user.dni=stateCedula;
                     }
-                 }], false);
-            Swal.fire({
-                title: 'Información registrada',
-                text: 'Se creó el nuevo usuario',
-                icon: 'success',
-                timer: 3000,
-                showConfirmButton: false
-            });
+                    return user;
+                })], false);
+                Swal.fire({
+                    title: 'Información registrada',
+                    text: 'Se creó el nuevo usuario',
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+                setStateId(0);
+                setStateCedula("");
+                setStateNombre("");
+                setStateApellido("");
+                setStateEmail("");
+            }else{
+                Swal.fire({
+                    title: 'No se pudo registrar los datos',
+                    text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                    icon: 'info',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            }
         }else{
-            Swal.fire({
-                title: 'No se pudo registrar los datos',
-                text: 'No se pudo registrar los datos, por favor intente en unos minutos',
-                icon: 'info',
-                timer: 3000,
-                showConfirmButton: false
-            });
+            let username=stateNombre.split(' ')[0];
+            username=username.substring(0, username.length<3?username.length:3) + stateApellido.split(' ')[0] + stateCedula.substring(6,10);
+            username=username.toLowerCase();
+            let password = generatePassword(12);
+            let datos={
+                "dni": stateCedula,
+                "name": stateNombre,
+                "lastname": stateApellido,
+                "username": username,
+                "password": password,
+                "email": stateEmail,
+                "dateOfBirth": "",
+                "address": "",
+                "phone": "",
+                "roleId": 2,
+                "vaccine": {}
+            };
+            const response = await clienteAxios.post('/user', datos);
+            if(response.status===201){
+                mutate("/getUsers", [...users,{
+                        "id": response.data.id,
+                        "name": response.data.name,
+                        "lastname": response.data.lastname,
+                        "dni": response.data.dni,
+                        "mail": response.data.email,
+                        "username": response.data.username,
+                        "address": "",
+                        "phone": "",
+                        "birth": "",
+                        "isAdmin": false,
+                        "needUpdate": true,
+                        "vaccination": {
+                            "status": false
+                        }
+                    }], false);
+                Swal.fire({
+                    title: 'Información registrada',
+                    text: 'Se creó el nuevo usuario',
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+                setStateId(0);
+                setStateCedula("");
+                setStateNombre("");
+                setStateApellido("");
+                setStateEmail("");
+            }else{
+                Swal.fire({
+                    title: 'No se pudo registrar los datos',
+                    text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                    icon: 'info',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            }
         }
     }
     return(
@@ -245,7 +319,7 @@ const Users=()=>{
             <div className="usersCard">
                 <h1 className="usersTittle">Listado de Usuarios</h1>
                 <fieldset className="userField">
-                    <legend>Agregar Usuario</legend>
+                    <legend>{stateId>0?"Actualizar Usuario":"Agregar Usuario"}</legend>
                     <div className="addUser">
                         <Input 
                             type="text"
@@ -288,9 +362,17 @@ const Users=()=>{
                             <IconButton
                                 id="aceptar"
                                 onClick={handleUser}
-                                name="Agregar"
-                                icon="fa fa-plus-circle"
+                                name={stateId>0?"Editar":"Agregar"}
+                                icon={stateId>0?"fa fa-edit":"fa fa-plus-circle"}
                                 type="IconButton"
+                            />
+                            <IconButton
+                                style={{display: stateId>0?"block":"none"}}
+                                id="cancelar"
+                                onClick={handleCancelar}
+                                name="Cancelar"
+                                icon="fa fa-times-circle"
+                                type="IconButtonAlter"
                             />
                         </div> 
                     </div>
