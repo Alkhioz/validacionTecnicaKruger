@@ -5,11 +5,11 @@
       "dni": "1101839312",
       "name": "Alejandro",
       "lastname": "Mendoza",
-      "username": "alemendoza9312",
-      "password": "Pass123.",
+      "username": "admin",
+      "password": "admin",
       "email": "admin@fakemail.com",
       "dateOfBirth": "1998-06-30",
-      "address": "Calle principal, Portoviejo",
+      "address": "Calle principal Portoviejo",
       "phone": "0996949451",
       "roleId": 1,
       "vaccine": {
@@ -31,7 +31,7 @@
       "phone": "0986545124",
       "roleId": 2,
       "vaccine": {
-        "type": "3",
+        "type": "1",
         "date": "2021-06-15",
         "dose": 1
       }

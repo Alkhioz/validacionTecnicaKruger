@@ -15,7 +15,7 @@ function Login(){
     const navigate = useNavigate();
     useEffect(() => {
         if (user && !loggedOut) {
-            navigate("/main");
+            navigate("/");
         }
     }, [user, loggedOut, loading]);
     
@@ -50,6 +50,7 @@ function Login(){
         <div className="loginLayout">
             <div className="loginCard">
                 <h1 className="loginTitle">Login IVK</h1>
+                <h2 className="loginSubtitulo">Inventario de vacunación de empleados</h2>
                 <form onSubmit={handleLogin}>
                     <Input 
                         type="text"
