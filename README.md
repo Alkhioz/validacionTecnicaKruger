@@ -57,26 +57,11 @@ Para realizar esa función tomé el algoritmo de las siguientes fuentes:
 [Estructura del Número de Cédula de Identidad](https://www.jybaro.com/blog/cedula-de-identidad-ecuatoriana/)  
 [Cómo validar cédula y RUC en Ecuador](https://medium.com/@bryansuarez/c%C3%B3mo-validar-c%C3%A9dula-y-ruc-en-ecuador-b62c5666186f#:~:text=El%20proceso%20para%20la%20validaci%C3%B3n,3%2C4%2C5)  
 ### Autentificación
-Para el proceso de autentificación use JWT y para facilitar el uso del token, lo agregué al axios con un interceptor. Junto con una verificación para los casos en que expira el token de acceso.  
+Para el proceso de autentificación use JWT y para facilitar el uso del token lo agregué al axios con un interceptor.  
 ```javascript
 const clienteAxios = axios.create({
     baseURL : 'http://localhost:8080/',
 });
-
-clienteAxios.interceptors.response.use(function (response) {
-     if(response.data.msg === "err"){
-        if(response.data.data.description.includes('invalid token')){
-            if("token"  in localStorage){
-                localStorage.removeItem("token");
-                window.location.reload();
-            }
-        }
-    }
-    return response;
-  }, function (error) {
-    return Promise.reject(error);
-});
-
 
 clienteAxios.interceptors.request.use(
     async config => {
@@ -92,4 +77,21 @@ clienteAxios.interceptors.request.use(
 error => {
     return Promise.reject(error);
 });
+```  
+### Data fetch
+Para obtener datos se usó el hook [SWR](https://swr.vercel.app/es-ES)  
+```javascript
+function useUser() {
+  const fetcher = async (url) => await clienteAxios.get(url).then(res => res.data);
+
+  const { data, error } = useSWR("/getCurrentUserData", fetcher);
+  const loading = !data && !error;
+  const loggedOut = error && error.response.status === 403;
+  
+  return {
+    loading,
+    loggedOut,
+    user: data,
+  };
+}
 ```
