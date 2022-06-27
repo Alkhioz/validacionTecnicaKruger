@@ -6,17 +6,23 @@ import IconButton from '../iconbutton/IconButton';
 import Input from '../input/Input';
 import {isNumeric, isNotDot, isLetter, isValidEmail} from '../../utilities/utilities';
 import verificarCedula from '../../utilities/validarCedula';
+import generatePassword from '../../utilities/generatePassword';
+import clienteAxios from "../../utilities/axios";
+import Swal from "sweetalert2";
+import { useSWRConfig } from 'swr';
 
 const Users=()=>{
-    const { users, noDataUsers, loadingUsers, mutateUsers } = UseUsers();
+    const { users, noDataUsers, loadingUsers } = UseUsers();
 
+    const { mutate } = useSWRConfig();
+    
     const[usersState, setUsersState] = useState([]);
 
     useEffect(() => {
         if (users && !noDataUsers) {
             setUsersState(users);
         }
-    }, [users, noDataUsers]);
+    }, [users, noDataUsers, loadingUsers]);
 
     const template = [
         {
@@ -124,6 +130,56 @@ const Users=()=>{
             setStateEmailError("");
         }
     }
+
+    const handleUser=async()=>{
+        if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === ""){
+            if(stateCedula === "")
+                setStateCedulaError("Debe rellenar este campo");
+            if(stateNombre === "")
+                setStateNombreError("Debe rellenar este campo");
+            if(stateApellido === "")
+                setStateApellidoError("Debe rellenar este campo");
+            if(stateEmail === "")
+                setStateEmailError("Debe rellenar este campo");
+            return false;
+        }
+        let username=stateNombre.split(' ')[0];
+        username=username.substring(0, username.length<3?username.length:3) + stateApellido.split(' ')[0] + stateCedula.substring(6,10);
+        username=username.toLowerCase();
+        let password = generatePassword(12);
+        let datos={
+            "dni": stateCedula,
+            "name": stateNombre,
+            "lastname": stateApellido,
+            "username": username,
+            "password": password,
+            "email": stateEmail,
+            "dateOfBirth": "",
+            "address": "",
+            "phone": "",
+            "roleId": 2,
+            "vaccine": {}
+        };
+        const response = await clienteAxios.post('/user', datos)
+        if(response.status===201){
+            Swal.fire({
+                title: 'Información registrada',
+                text: 'Se creó el nuevo usuario',
+                icon: 'success',
+                timer: 3000,
+                showConfirmButton: false
+            });
+            mutate('/getUsers');
+        }else{
+            Swal.fire({
+                title: 'No se pudo registrar los datos',
+                text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                icon: 'info',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        }
+    }
     return(
         !loadingUsers?
         <div className="users">
@@ -172,7 +228,7 @@ const Users=()=>{
                         <div className="addUserActions">
                             <IconButton
                                 id="aceptar"
-                                onClick={()=>{}}
+                                onClick={handleUser}
                                 name="Agregar"
                                 icon="fa fa-plus-circle"
                                 type="IconButton"

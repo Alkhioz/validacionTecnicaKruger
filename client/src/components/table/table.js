@@ -4,6 +4,7 @@ const Table=(props)=>{
     const TableHeader=()=>props.template.map((element, i)=>{
         return <th key={`TableHead${i}`}>{element.name}</th>;
     });
+    console.log(typeof props.data);
     const TableBody=()=>props.data.map((element,i)=>{
         return <tr key={`TableBody${i}`}>{props.template.map((template, j)=>{
             return <td key={`TableHead${i}${j}`}>

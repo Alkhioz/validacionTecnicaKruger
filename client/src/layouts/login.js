@@ -6,9 +6,12 @@ import {login} from '../libs/auth';
 import { useNavigate  } from "react-router-dom";
 import useUser from '../data/use-user';
 import Loading from './loading';
+import { useSWRConfig } from 'swr';
 
 function Login(){
-    const { user, mutateUser, loggedOut, loading } = useUser();
+    const { user, loggedOut, loading } = useUser();
+
+    const { mutate } = useSWRConfig();
     const navigate = useNavigate();
     useEffect(() => {
         if (user && !loggedOut) {
@@ -36,7 +39,7 @@ function Login(){
         let authdata = await login(stateUsuario, stateClave);
         if(authdata.msg === "ok"){
             localStorage.setItem("token", authdata.data.token);
-            mutateUser("/getCurrentUserData");
+            mutate("/getCurrentUserData");
         }else{
             setStateError(authdata.data.description);
         }
