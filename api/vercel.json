@@ -1,11 +1,13 @@
 {
     "version": 2,
-    "builds": [{
-        "src": "*.js",
-        "use": "@vercel/node"
-    }],
-    "routes": [{
+    "functions": {
+        "server.js": {
+          "memory": 1024,
+          "includeFiles": "db.json"
+        }
+    },
+    "rewrites": [{
         "src": "/(.*)",
-        "dest": "/server.js"
+        "dest": "server.js"
     }]
 }
