@@ -1,7 +1,7 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const db = require('./db.json');
+const router = jsonServer.router('/tmp/db.json');
+const db = require('/tmp/db.json');
 const middlewares = jsonServer.defaults()
 const cors = require('cors');
 
@@ -58,6 +58,13 @@ const isAdmin = (req, res, next) => {
         })
     }
 }
+
+server.get('/', (req, res) => {
+    res.jsonp({
+        msg: 'ok',
+        data: 'hello'
+    });
+})
 
 server.post('/login', (req, res) => {
     let {username, password} = req.body
@@ -121,5 +128,5 @@ server.use(middlewares)
 server.use(auth)
 server.use(router)
 server.listen(8080, () => {
-  console.log('Youre server is running')
+  console.log('Youre server has run')
 })

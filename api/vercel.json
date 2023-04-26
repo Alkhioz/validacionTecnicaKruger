@@ -1,13 +1,19 @@
 {
     "version": 2,
-    "functions": {
-        "server.js": {
-          "memory": 1024,
-          "includeFiles": "db.json"
+    "name": "your-app-name",
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node",
+        "config": {
+            "includeFiles": ["tmp/db.json"]
         }
-    },
-    "rewrites": [{
+      }
+    ],
+    "routes": [
+      {
         "src": "/(.*)",
-        "dest": "server.js"
-    }]
+        "dest": "/server.js"
+      }
+    ]
 }
