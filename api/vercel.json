@@ -6,10 +6,6 @@
           "includeFiles": "db.json"
         }
     },
-    "builds": [{
-        "src": "*.js",
-        "use": "@vercel/node"
-    }],
     "routes": [{
         "src": "/(.*)",
         "dest": "/server.js"
