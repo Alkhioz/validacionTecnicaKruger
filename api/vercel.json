@@ -6,8 +6,12 @@
           "includeFiles": "db.json"
         }
     },
-    "rewrites": [{
+    "builds": [{
+        "src": "*.js",
+        "use": "@vercel/node"
+    }],
+    "routes": [{
         "src": "/(.*)",
-        "dest": "server.js"
+        "dest": "/server.js"
     }]
 }
