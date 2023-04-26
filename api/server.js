@@ -1,7 +1,7 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const db = require('./db.json');
+const router = jsonServer.router('/tmp/db.json');
+const db = require('/tmp/db.json');
 const middlewares = jsonServer.defaults()
 const cors = require('cors');
 
@@ -62,7 +62,7 @@ const isAdmin = (req, res, next) => {
 server.get('/', (req, res) => {
     res.jsonp({
         msg: 'ok',
-        data: 'hello',
+        data: 'hello'
     });
 })
 
