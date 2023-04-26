@@ -59,6 +59,13 @@ const isAdmin = (req, res, next) => {
     }
 }
 
+server.get('/', (req, res) => {
+    res.jsonp({
+        msg: 'ok',
+        data: 'hello',
+    });
+})
+
 server.post('/login', (req, res) => {
     let {username, password} = req.body
     let user = db.user.find(user=>{
