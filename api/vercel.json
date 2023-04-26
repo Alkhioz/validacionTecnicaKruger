@@ -1,9 +1,9 @@
 {
     "version": 2,
     "functions": {
-        "server.js": {
+        "/server.js": {
           "memory": 1024,
-          "includeFiles": "db.json"
+          "includeFiles": "/db.json"
         }
     },
     "routes": [{
