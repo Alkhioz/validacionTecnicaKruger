@@ -46,7 +46,7 @@ const auth = (req, res, next) => {
 }
 
 const isAdmin = (req, res, next) => {
-    let user = db.user.find(role=>{
+    let user = db?.user?.find(role=>{
         return role.id == req.decoded
     })
     if (user.roleId == 1){
