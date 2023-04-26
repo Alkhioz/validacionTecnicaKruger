@@ -121,5 +121,5 @@ server.use(middlewares)
 server.use(auth)
 server.use(router)
 server.listen(8080, () => {
-  console.log('Youre server is running')
+  console.log('Youre server has run')
 })
