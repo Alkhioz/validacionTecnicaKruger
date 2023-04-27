@@ -1,7 +1,7 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router('/tmp/db.json');
-const db = require('/tmp/db.json');
+const router = jsonServer.router('db.json');
+const db = require('./db.json');
 const middlewares = jsonServer.defaults()
 const cors = require('cors');
 
@@ -68,7 +68,7 @@ server.get('/', (req, res) => {
 
 server.post('/login', (req, res) => {
     let {username, password} = req.body
-    let user = db.user.find(user=>{
+    let user = db?.user?.find(user=>{
         return user.username === username && user.password === password
     })
     if(user === undefined){
@@ -88,7 +88,7 @@ server.post('/login', (req, res) => {
 
 server.get('/getCurrentUserData', auth, (req, res) => {
 
-    let user = db.user.find(user => {
+    let user = db?.user?.find(user => {
         return user.id == req.decoded
     })
 
@@ -102,8 +102,8 @@ server.get('/getCurrentUserData', auth, (req, res) => {
 })
 
 server.get('/getUsers', auth, isAdmin, (req, res) => {
-    let users = db.user.map(user =>{
-        let vaccine=db.vaccine.find(vaccine => parseInt(vaccine.id) === parseInt(user.vaccine.type));
+    let users = db?.user?.map(user =>{
+        let vaccine=db?.vaccine?.find(vaccine => parseInt(vaccine.id) === parseInt(user.vaccine.type));
         let data = {
             id: user.id,
             name: user.name,
