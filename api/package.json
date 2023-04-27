@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "description": "Fake api \"vaccination inventory\" for Kruger's technical validation.",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "cors": "^2.8.5",
     "json-server": "^0.17.0",
