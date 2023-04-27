@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const clienteAxios = axios.create({
-    baseURL : 'https://api-validacion-tecnica-kruger.vercel.app/',
+    baseURL : 'http://167.71.110.161:8080/',
 });
 
 clienteAxios.interceptors.response.use(function (response) {
