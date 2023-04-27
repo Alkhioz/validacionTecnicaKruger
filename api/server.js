@@ -127,6 +127,6 @@ server.get('/getUsers', auth, isAdmin, (req, res) => {
 server.use(middlewares)
 server.use(auth)
 server.use(router)
-server.listen(8080, () => {
+server.listen(process.env.PORT||8080, () => {
   console.log('Youre server has run')
 })
