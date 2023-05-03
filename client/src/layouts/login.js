@@ -50,25 +50,25 @@ function Login(){
         <div className="loginLayout">
             <div className="loginCard">
                 <h1 className="loginTitle">Login IVK</h1>
-                <h2 className="loginSubtitulo">Inventario de vacunación de empleados</h2>
+                <h2 className="loginSubtitulo">Employee Vaccination Inventory</h2>
                 <form onSubmit={handleLogin}>
                     <Input 
                         type="text"
-                        name="Usuario"
+                        name="User"
                         id="usuario"
                         value={stateUsuario}invalid user or password
                         onChange={onChangeUsuario}
                     />
                     <Input 
                         type="password"
-                        name="Contraseña"
+                        name="Password"
                         id="contraseña"
                         value={stateClave}
                         onChange={onChangeClave}
                     />
                     <IconButton 
                         id="login"
-                        name="Iniciar sesión"
+                        name="Login"
                         icon="fa fa-sign-in"
                         type="IconButton"
                     />

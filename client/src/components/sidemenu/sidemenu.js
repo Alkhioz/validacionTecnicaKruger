@@ -13,10 +13,10 @@ const sideMenu = (props)=>{
                     <button className="sideMenuContainerCardHeaderButton" onClick={props.handleShow}><i className="fa fa-times-circle" aria-hidden="true"></i></button>
             </div>
             <div className="sideMenuContainerCard">
-                <p><b>Bienvenido </b>{props.name}</p>
+                <p><b>Welcome </b>{props.name}</p>
                 <div className="sideMenu">
                     {props.showProtected&&protectedMenuItems()}
-                    <button className="sideMenuLogout" onClick={props.handleLogout} value="1">Salir<i className="fa fa-sign-out" aria-hidden="true"></i></button>
+                    <button className="sideMenuLogout" onClick={props.handleLogout} value="1">Logout<i className="fa fa-sign-out" aria-hidden="true"></i></button>
                 </div>
             </div>
         </div>

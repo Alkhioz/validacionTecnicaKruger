@@ -17,7 +17,7 @@ function Inicio(){
 
     const { mutate } = useSWRConfig();
 
-    const adminMenuItems = [{name:"Usuarios", icon: "fa fa-users"}, {name:"Editar Perfil", icon: "fa fa-cogs"}];
+    const adminMenuItems = [{name:"Users", icon: "fa fa-users"}, {name:"Edit Profile", icon: "fa fa-cogs"}];
     
     const handleChangeNav = (evt) => {
         evt.preventDefault();

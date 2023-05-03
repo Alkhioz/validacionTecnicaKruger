@@ -46,7 +46,7 @@ const Users=()=>{
                const response= await clienteAxios.delete(`/user/${evt.target.value}`);
                if(response.status===200){
                 Swal.fire({
-                    title: 'Información registrada',
+                    title: 'Data was successfully recorded',
                     text: 'Se eliminó el usuario',
                     icon: 'success',
                     timer: 3000,
@@ -56,8 +56,8 @@ const Users=()=>{
                 mutate("/getUsers", users.filter(user=>parseInt(user.id)!==parseInt(evt.target.value)), false);
             }else{
                 Swal.fire({
-                    title: 'No se pudo registrar los datos',
-                    text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                    title: 'Failed to record data',
+                    text: 'Failed to register the data, please try again in a few minutes',
                     icon: 'info',
                     timer: 3000,
                     showConfirmButton: false
@@ -105,44 +105,44 @@ const Users=()=>{
             },
         },
         {
-            name:"Cédula",
+            name:"ID",
             id:"dni"
         },{
-            name:"Usuario",
+            name:"Username",
             id:"username"
         },{
-            name:"Nombres",
+            name:"First name",
             id:"name"
         },{
-            name:"Apellidos",
+            name:"Last name",
             id:"lastname"
         },{
-            name:"Correo",
+            name:"Email",
             id:"mail"
         },{
-            name:"Fecha Nacimiento",
+            name:"Birth date",
             id:"birth"
         },{
-            name:"N° Teléfono",
+            name:"Phone number",
             id:"phone"
         },{
-            name:"Dirección",
+            name:"Address",
             id:"address"
         },{
             name:"Role",
             id:"isAdmin",
-            render: (val)=> val?"Adminstrador":"Empleado"
+            render: (val)=> val?"Administrator":"Employee"
         },{
-            name:"Estado",
+            name:"Status",
             id:"needUpdate",
-            render: (val)=> !val?"Datos Completos":"Datos Incompletos"
+            render: (val)=> !val?"Complete data":"Incomplete data"
         },{
-            name:"Vacuna",
+            name:"Vaccine",
             id:"vaccination",
             render: (val)=> val.status?<>
-                <p style={{color:"green"}}>Vacunado</p>
+                <p style={{color:"green"}}>Vaccinated</p>
                 <small>{val.name} ({val.dose}) {val.date}</small>
-            </>:<p style={{color:"orange"}}>Sin Vacunar</p>
+            </>:<p style={{color:"orange"}}>Not vaccinated</p>
         }
     ];
 
@@ -179,7 +179,7 @@ const Users=()=>{
 
     const onBlurNombre = () => {
         if(stateNombre === ""){
-            setStateNombreError("Este campo no puede quedar vacío");
+            setStateNombreError("This field cannot be empty");
         }else{
             setStateNombreError("");
         }
@@ -196,7 +196,7 @@ const Users=()=>{
 
     const onBlurApellido = () => {
         if(stateApellido === ""){
-            setStateApellidoError("Este campo no puede quedar vacío");
+            setStateApellidoError("This field cannot be empty");
         }else{
             setStateApellidoError("");
         }
@@ -211,7 +211,7 @@ const Users=()=>{
     }
     const onBlurEmail = () => {
         if(!isValidEmail(stateEmail)){
-            setStateEmailError("Debe colocar un correo valido");
+            setStateEmailError("You must enter a valid email");
         }else{
             setStateEmailError("");
         }
@@ -222,13 +222,13 @@ const Users=()=>{
     const handleUser=async()=>{
         if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === ""){
             if(stateCedula === "")
-                setStateCedulaError("Debe rellenar este campo");
+                setStateCedulaError("You must fill in this field");
             if(stateNombre === "")
-                setStateNombreError("Debe rellenar este campo");
+                setStateNombreError("You must fill in this field");
             if(stateApellido === "")
-                setStateApellidoError("Debe rellenar este campo");
+                setStateApellidoError("You must fill in this field");
             if(stateEmail === "")
-                setStateEmailError("Debe rellenar este campo");
+                setStateEmailError("You must fill in this field");
             return false;
         }
         if(stateCedulaError !== "" || stateNombreError !== "" || stateApellidoError !== "" || stateEmailError !== "")
@@ -257,8 +257,8 @@ const Users=()=>{
                     return user;
                 })], false);
                 Swal.fire({
-                    title: 'Información registrada',
-                    text: 'Se creó el nuevo usuario',
+                    title: 'Data was successfully recorded',
+                    text: 'New user was created',
                     icon: 'success',
                     timer: 3000,
                     showConfirmButton: false
@@ -270,8 +270,8 @@ const Users=()=>{
                 setStateEmail("");
             }else{
                 Swal.fire({
-                    title: 'No se pudo registrar los datos',
-                    text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                    title: 'Failed to record data',
+                    text: 'Failed to register the data, please try again in a few minutes',
                     icon: 'info',
                     timer: 3000,
                     showConfirmButton: false
@@ -315,8 +315,8 @@ const Users=()=>{
                         }
                     }], false);
                 Swal.fire({
-                    title: 'Información registrada',
-                    text: 'Se creó el nuevo usuario',
+                    title: 'Data was successfully recorded',
+                    text: 'New user was created',
                     icon: 'success',
                     timer: 3000,
                     showConfirmButton: false
@@ -328,8 +328,8 @@ const Users=()=>{
                 setStateEmail("");
             }else{
                 Swal.fire({
-                    title: 'No se pudo registrar los datos',
-                    text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                    title: 'Failed to record data',
+                    text: 'Failed to register the data, please try again in a few minutes',
                     icon: 'info',
                     timer: 3000,
                     showConfirmButton: false
@@ -398,13 +398,13 @@ const Users=()=>{
         !loadingUsers?
         <div className="users">
             <div className="usersCard">
-                <h1 className="usersTittle">Listado de Usuarios</h1>
+                <h1 className="usersTittle">User List</h1>
                 <fieldset className="userField">
-                    <legend>{stateId>0?"Actualizar Usuario":"Agregar Usuario"}</legend>
+                    <legend>{stateId>0?"Update User":"Add User"}</legend>
                     <div className="addUser">
                         <Input 
                             type="text"
-                            name="Cédula"
+                            name="Id"
                             id="Cedula"
                             maxLength="10"
                             value={stateCedula}
@@ -414,7 +414,7 @@ const Users=()=>{
                         />
                         <Input 
                             type="text"
-                            name="Nombre"
+                            name="First name"
                             id="nombre"
                             value={stateNombre}
                             onChange={onChangeNombre}
@@ -423,7 +423,7 @@ const Users=()=>{
                         />
                         <Input 
                             type="text"
-                            name="Apellido"
+                            name="Last name"
                             id="apellido"
                             value={stateApellido}
                             onChange={onChangeApellido}
@@ -432,7 +432,7 @@ const Users=()=>{
                         />
                         <Input 
                             type="text"
-                            name="Correo"
+                            name="Email"
                             id="Correo"
                             value={stateEmail}
                             onChange={onChangeEmail}
@@ -443,7 +443,7 @@ const Users=()=>{
                             <IconButton
                                 id="aceptar"
                                 onClick={handleUser}
-                                name={stateId>0?"Editar":"Agregar"}
+                                name={stateId>0?"Edit":"Add"}
                                 icon={stateId>0?"fa fa-edit":"fa fa-plus-circle"}
                                 type="IconButton"
                             />
@@ -451,7 +451,7 @@ const Users=()=>{
                                 style={{display: stateId>0?"block":"none"}}
                                 id="cancelar"
                                 onClick={handleCancelar}
-                                name="Cancelar"
+                                name="Cancel"
                                 icon="fa fa-times-circle"
                                 type="IconButtonAlter"
                             />
@@ -459,18 +459,18 @@ const Users=()=>{
                     </div>
                 </fieldset>
                 <fieldset className="userField">
-                    <legend>Filtrar</legend>
+                    <legend>Filter</legend>
                     <div className="addUser">
                         <Select
-                            options={[{id: 0,body: "Seleccione"},{id: 1,body: "No"},{id: 2,body: "Si"}]}
-                            name={"¿Está vacunado?"}
+                            options={[{id: 0,body: "select"},{id: 1,body: "No"},{id: 2,body: "Yes"}]}
+                            name={"Are you vaccinated?"}
                             id="vacuna"
                             value={stateVacunadoFiltro}
                             onChange={onChangeVacunadoFlitro}
                         />
                         <Select
-                            options={[{id: 0,body: "Seleccione"},...listaVaccineState]}
-                            name={"Tipo de vacuna"}
+                            options={[{id: 0,body: "select"},...listaVaccineState]}
+                            name={"Vaccine type"}
                             id="vacuna"
                             value={stateVacuna}
                             onChange={onChangeVacuna}
@@ -478,7 +478,7 @@ const Users=()=>{
                         />
                          <Input
                             type="date"
-                            name="Fecha Inicio"
+                            name="Start date"
                             id="fechavaccine"
                             value={stateFechaInicio}
                             onChange={onChangeFechaInicio}
@@ -486,7 +486,7 @@ const Users=()=>{
                         />
                         <Input
                             type="date"
-                            name="Fecha Fin"
+                            name="End date"
                             id="fechavaccinefin"
                             value={stateFechaFin}
                             onChange={onChangeFechaFin}
@@ -494,16 +494,16 @@ const Users=()=>{
                         />
                         <div className="addUserActions">
                             <IconButton
-                                id="filtrar"
+                                id="Filter"
                                 onClick={handleFiltro}
-                                name="Filtrar"
+                                name="Filter"
                                 icon="fa fa-search"
                                 type="IconButton"
                             />
                             <IconButton
                                 id="cancelar"
                                 onClick={handleCancelarFiltro}
-                                name="Cancelar"
+                                name="Cancel"
                                 icon="fa fa-times-circle"
                                 type="IconButtonAlter"
                             />

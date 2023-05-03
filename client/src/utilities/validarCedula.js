@@ -5,14 +5,14 @@ const validarCedula = (cedula) => {
     if(cedula.length!==10)
         return {
             status: false,
-            msg: "La cédula debe tener 10 Digitos"
+            msg: "The ID must have 10 digits"
         };
     //Check Cod Provincia
     let codProvincia = cedula.substring(0,2);
     if((codProvincia < 1 || codProvincia > 24) && parseInt(codProvincia)!==30)
         return {
             status: false,
-            msg: "La cédula no pertenece a una región valida"
+            msg: "The ID does not belong to a valid region"
         };
     //Check third digit
     /*let thirdDigit = cedula[2];
@@ -30,7 +30,7 @@ const validarCedula = (cedula) => {
     if(parseInt(validationDigit) !== parseInt(cedula[9]))
         return {
             status: false,
-            msg: "No coincide el dígito verificador"
+            msg: "Check digit does not match"
         };
     return {
         status: true

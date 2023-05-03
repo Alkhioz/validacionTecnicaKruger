@@ -38,7 +38,7 @@ const Profile=(props)=>{
         if (vaccine && !noDataVaccine) {
             setStateVaccines([{
                 id: 0,
-                body: "Seleccione la vacuna"
+                body: "Select vaccine"
               },
               ...vaccine]);
         }
@@ -78,7 +78,7 @@ const Profile=(props)=>{
 
     const onBlurNombre = () => {
         if(stateNombre === ""){
-            setStateNombreError("Este campo no puede quedar vacío");
+            setStateNombreError("This field cannot be empty");
         }else{
             setStateNombreError("");
         }
@@ -95,7 +95,7 @@ const Profile=(props)=>{
 
     const onBlurApellido = () => {
         if(stateApellido === ""){
-            setStateApellidoError("Este campo no puede quedar vacío");
+            setStateApellidoError("This field cannot be empty");
         }else{
             setStateApellidoError("");
         }
@@ -127,7 +127,7 @@ const Profile=(props)=>{
 
     const onBlurTelefono = () => {
         if(stateTelefono === ""){
-            setstateTelefonoError("Este campo no puede quedar vacío");
+            setstateTelefonoError("This field cannot be empty");
         }else{
             if(stateTelefono.length<10){
                 setstateTelefonoError("El número de teléfono debe tener 10 digitos");
@@ -163,7 +163,7 @@ const Profile=(props)=>{
 
     const  onBlurDireccion= () => {
         if(stateDireccion === ""){
-            setstateDireccionError("Este campo no puede quedar vacío");
+            setstateDireccionError("This field cannot be empty");
         }else{
             setstateDireccionError("");
         }
@@ -194,7 +194,7 @@ const Profile=(props)=>{
     }
     const  onBlurVacuna = () => {
         if(parseInt(stateVacuna) === 0){
-            setStateVacunaError("Debe seleccionar una vacuna");
+            setStateVacunaError("You must select a vaccine");
         }else{
             setStateVacunaError("");
         }
@@ -218,10 +218,10 @@ const Profile=(props)=>{
 
     const onBlurDosis = () => {
         if(stateDosis === ""){
-            setStateDosisError("Este campo no puede quedar vacío");
+            setStateDosisError("This field cannot be empty");
         }else{
             if(stateDosis<1){
-                setStateDosisError("La dosis debe ser mayor a 0");
+                setStateDosisError("Dose must be greater than 0");
             }else{
                 setStateDosisError("");
             }
@@ -242,26 +242,26 @@ const Profile=(props)=>{
         }
         if(stateCedula === "" || stateNombre === "" || stateApellido === "" || stateEmail === "" || stateFecha === "" || stateDireccion === "" || stateTelefono === "" || (parseInt(stateVacunado)===2 && (stateDosis === "" ||stateFechaVacunacion === "" || parseInt(stateVacuna) === 0))){
             if(stateCedula === "")
-                setStateCedulaError("Debe rellenar este campo");
+                setStateCedulaError("You must fill in this field");
             if(stateNombre === "")
-                setStateNombreError("Debe rellenar este campo");
+                setStateNombreError("You must fill in this field");
             if(stateApellido === "")
-                setStateApellidoError("Debe rellenar este campo");
+                setStateApellidoError("You must fill in this field");
             if(stateEmail === "")
-                setStateEmailError("Debe rellenar este campo");
+                setStateEmailError("You must fill in this field");
             if(stateFecha === "")
-                setStateFechaError("Debe rellenar este campo");
+                setStateFechaError("You must fill in this field");
             if(stateDireccion === "")
-                setstateDireccionError("Debe rellenar este campo");
+                setstateDireccionError("You must fill in this field");
             if(stateTelefono === "")
-                setstateTelefonoError("Debe rellenar este campo");
+                setstateTelefonoError("You must fill in this field");
             if(parseInt(stateVacunado)===2){
                 if(stateDosis === "")
-                    setStateDosisError("Debe rellenar este campo");
+                    setStateDosisError("You must fill in this field");
                 if(stateFechaVacunacion === "")
-                    setStateFechaVacunacionError("Debe colocar la fecha de vacunación");
+                    setStateFechaVacunacionError("You must enter the vaccination date");
                 if(parseInt(stateVacuna) === 0)
-                    setStateVacunaError("Debe seleccionar una vacuna");
+                    setStateVacunaError("You must select a vaccine");
             }
             return false;
         }
@@ -286,8 +286,8 @@ const Profile=(props)=>{
         const actualizarDatos = await clienteAxios.patch(`/user/${profile.id}`,data);
         if(actualizarDatos.status === 200){
             Swal.fire({
-                title: 'Información registrada',
-                text: 'Se actualizaron los datos del usuario',
+                title: 'Registered information',
+                text: 'User data has been updated',
                 icon: 'success',
                 timer: 3000,
                 showConfirmButton: false
@@ -295,7 +295,7 @@ const Profile=(props)=>{
         }else{
             Swal.fire({
                 title: 'No se pudo registrar los datos',
-                text: 'No se pudo registrar los datos, por favor intente en unos minutos',
+                text: 'Failed to register the data, please try again in a few minutes',
                 icon: 'info',
                 timer: 3000,
                 showConfirmButton: false
@@ -306,12 +306,12 @@ const Profile=(props)=>{
     return(
             (!loadingVaccine&&!loading)?<div className="profile">
             <div className="profileCard">
-                <h1 className="profileTittle">Datos de Usuario</h1>
+                <h1 className="profileTittle">User Profile</h1>
                 {stateMissingData!==""&&<p className="profileMissingData">{stateMissingData}</p>}
                 <div className="profileUserData">
                     <Input 
                         type="text"
-                        name="Cédula"
+                        name="ID"
                         id="Cedula"
                         maxLength="10"
                         value={stateCedula}
@@ -321,7 +321,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="text"
-                        name="Nombre"
+                        name="First name"
                         id="nombre"
                         value={stateNombre}
                         onChange={onChangeNombre}
@@ -330,7 +330,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="text"
-                        name="Apellido"
+                        name="Last name"
                         id="apellido"
                         value={stateApellido}
                         onChange={onChangeApellido}
@@ -339,7 +339,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="text"
-                        name="Correo"
+                        name="Email"
                         id="Correo"
                         value={stateEmail}
                         onChange={onChangeEmail}
@@ -348,7 +348,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="date"
-                        name="Fecha Nacimiento"
+                        name="Birth date"
                         id="fecha"
                         value={stateFecha}
                         onChange={onChangeFecha}
@@ -357,7 +357,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="text"
-                        name="número de teléfono"
+                        name="Phone number"
                         id="telefono"
                         maxLength="10"
                         value={stateTelefono}
@@ -367,7 +367,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="text"
-                        name="Dirección"
+                        name="Address"
                         id="direccion"
                         value={stateDireccion}
                         onChange={onChangeDireccion}
@@ -375,15 +375,15 @@ const Profile=(props)=>{
                         error={stateDireccionError}
                     />
                     <Select 
-                        options={[{id: 1,body: "No"},{id: 2,body: "Si"}]}
-                        name={"¿Está vacunado?"}
+                        options={[{id: 1,body: "No"},{id: 2,body: "Yes"}]}
+                        name={"Are you vaccinated?"}
                         id="vacuna"
                         value={stateVacunado}
                         onChange={onChangeVacunado}
                     />
                     {parseInt(stateVacunado)===2&&<><Input 
                         type="text"
-                        name="Dosis"
+                        name="Doses"
                         id="dose"
                         value={stateDosis}
                         onChange={onChangeDosis}
@@ -392,7 +392,7 @@ const Profile=(props)=>{
                     />
                     <Input 
                         type="date"
-                        name="Fecha Vacunación"
+                        name="Vaccination Date"
                         id="fechavaccine"
                         value={stateFechaVacunacion}
                         onChange={onChangeFechaVacunacion}
@@ -401,7 +401,7 @@ const Profile=(props)=>{
                     />
                     <Select 
                         options={stateVaccines}
-                        name={"Vacuna"}
+                        name={"Vaccine"}
                         id="vacuna"
                         value={stateVacuna}
                         onChange={onChangeVacuna}
@@ -413,7 +413,7 @@ const Profile=(props)=>{
                     <IconButton 
                         id="updateUserInfo"
                         onClick={handleUpdateData}
-                        name="Actualizar Datos"
+                        name="Update data"
                         icon="fa fa-pencil"
                         type="IconButton"
                     />

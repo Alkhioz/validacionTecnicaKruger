@@ -11,7 +11,7 @@ const navBar = (props) =>{
                 {props.showProtected&&<div className="navBarProtected">{protectedMenuItems()}</div>}
             </div>
             <div className="navBarUser">
-                <p><b>Bienvenido </b>{props.name} <a className="navBarLogout" href="/login" onClick={props.handleLogout}>Salir</a></p>
+                <p><b>Welcome </b>{props.name} <a className="navBarLogout" href="/login" onClick={props.handleLogout}>Logout</a></p>
             </div>
             <div className="navBarResponsive">
                 <button onClick={props.handleShow} className="navBarResponsiveButton"><i className="fa fa-bars"></i></button>
